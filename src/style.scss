@@ -4,16 +4,26 @@
 
   margin: 1rem;
 
+  .imgContainer2 {
+    opacity: 0;
+    background-color: red;
+  }
+
   .imgContainer {
+    opacity: 1;
     border: 1px solid black;
     padding: 1rem;
-    transform: 2s;
+    transition: opacity 2s linear;
     img {
-      transform: 2s;
       border: 1px solid black;
       width: 550px;
     }
   }
+}
+
+.categories-list {
+  display: flex;
+  gap: 1rem;
 }
 
 .imageColorContainer {
@@ -42,5 +52,26 @@
     img {
       height: 100px;
     }
+  }
+}
+
+.interior-upHolstery {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  img {
+    width: 60px;
+  }
+}
+
+.interior-trims {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  img {
+    width: 60px;
   }
 }

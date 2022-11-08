@@ -1,7 +1,10 @@
-import { useState, useEffect, useRef } from "react"
+import React, { useState, createRef } from "react"
+import { createRoot } from "react-dom/client"
+import { Container, ListGroup, Button } from "react-bootstrap"
+import { CSSTransition, TransitionGroup } from "react-transition-group"
+import ReactCSSTransitionGroup from "react-transition-group"
 import "./style.scss"
-
-import styled from "styled-components"
+import "bootstrap/dist/css/bootstrap.min.css"
 
 import { cars } from "./data/cars"
 
@@ -10,96 +13,15 @@ function App() {
   const [urlsId, setUrlsId] = useState(4)
   const [carsListId, setCarsListId] = useState(0)
   const [carsWheelsId, setCarsWheelsId] = useState(0)
-  // const [mousePosition, onMousePosition] =
-  //   useState<React.Dispatch<React.SetStateAction<number>>>()
-  const [clickPosition, setClickPosition] = useState(0)
-  const [mousePosition, onMousePosition] = useState(0)
-  const [prevMousePosition, setPrevMousePosition] = useState(0)
-  const [maxPosition, setMaxPosition] = useState(100)
-  const refContainer = useRef<HTMLImageElement | null>(null)
 
-  // useEffect(() => {
-  //   setPrevMousePosition(prevMousePosition + 5)
-
-  //   setPrevMousePosition((prev) => {
-  //     if (prev >= maxPosition) {
-  //       setPrevMousePosition(0)
-  //     }
-  //     return prev
-  //   })
-
-  //   setClickPosition(clickPosition + 1)
-
-  //   if (prevMousePosition >= 95) {
-  //     setUrlsId(urlsId + 1)
-  //   }
-
-  //   // const moveRight = () => {
-  //   setUrlsId((prev) => {
-  //     if (prev >= cars[0].photos.length - 1) {
-  //       return 1
-  //     }
-  //     return prev + 1
-  //   })
-  //   // }
-
-  //   // const moveLeft = () => {
-  //   setUrlsId((prev) => {
-  //     if (prev <= 0) {
-  //       return cars[0].photos.length - 1
-  //     }
-  //     return prev - 1
-  //   })
-  //   // }
-
-  //   // setUrlsId((prev) => {
-  //   //   if (prev >= cars.length - 1) {
-  //   //     return 1
-  //   //   }
-  //   //   return prev + 1
-  //   // })
-
-  //   // setUrlsId((prev) => {
-  //   //   if (prev <= 0) {
-  //   //     return cars.length - 1
-  //   //   }
-  //   //   return prev - 1
-  //   // })
-
-  //   // setUrlsId((prev) => {
-  //   //   if (prev >= urls.length) {
-  //   //     setUrlsId(0)
-  //   //   }
-  //   //   if (prev <= 0) {
-  //   //     setUrlsId(urls.length - 1)
-  //   //   }
-  //   //   return prev
-  //   // })
-
-  //   // if (urlsId >= urls.length) {
-  //   //   setUrlsId(1)
-  //   // }
-  //   // if (urlsId <= 0) {
-  //   //   setUrlsId(urls.length - 1)
-  //   // }
-
-  //   // if (prevMousePosition >= clickPosition) {
-  //   //   setUrlsId(urlsId + 1)
-  //   // }
-
-  //   // console.log(clickPosition, prevMousePosition)
-  // }, [mousePosition])
-
-  const moveHandler = (e: any) => {
-    onMousePosition(e.offsetX)
-  }
+  const [upHolsteryId, setUpHolsteryId] = useState(0)
+  const [togleType, setTogleType] = useState("Exterior")
 
   const clickHandler = (e: any) => {
-    // setClickPosition(e.nativeEvent.offsetX)
-    // refContainer.current?.addEventListener("mousemove", moveHandler)
     if (e.deltaY > 0) {
       setUrlsId(urlsId - 1)
     }
+
     if (e.deltaY < 0) {
       setUrlsId(urlsId + 1)
     }
@@ -117,31 +39,6 @@ function App() {
       }
       return prev - 1
     })
-    // const img = document.getElementById("imgContainer")
-  }
-
-  const upHandler = (e: any) => {
-    if (e.type === "mouseup") {
-      // img?.removeEventListener("mousemove", clickHandler)
-    }
-  }
-
-  const moveRight = () => {
-    setUrlsId((prev) => {
-      if (prev >= urls[carsListId].wheel[carsWheelsId].photos.length) {
-        return 1
-      }
-      return prev + 1
-    })
-  }
-
-  const moveLeft = () => {
-    setUrlsId((prev) => {
-      if (prev <= 0) {
-        return urls[carsListId].wheel[carsWheelsId].photos.length - 1
-      }
-      return prev - 1
-    })
   }
 
   const handleCarId = (index: any) => {
@@ -149,74 +46,131 @@ function App() {
     setCarsWheelsId(0)
   }
 
+  const divStyle = {
+    opacity: carsListId === carsListId ? "1" : "0",
+    transition: "opacity 2s ease",
+  }
+
+  // console.log(urls[carsListId].interior[0].items[0])
+
+  const togleContainer = {
+    display: togleType === "Exterior" ? "block" : "none",
+  }
+
   return (
     <>
       <div className="container">
         <div
-          className="imgContainer"
-          ref={refContainer}
-          id="imgContainer"
-          onWheel={clickHandler}
-          // onMouseUp={upHandler}
+          className="categories-list"
+          onClick={(e: any) => setTogleType(e.target.textContent)}
         >
-          <img
-            src={urls[carsListId].wheel[carsWheelsId].photos[urlsId]}
-            alt=""
-          />
+          <div className="categories-exterior">
+            <p>Exterior</p>
+          </div>
+          <div className="categories-interior">
+            <p>Interior</p>
+          </div>
         </div>
 
-        <div className="imageColorContainer">
-          {urls.map((item: any, index: any) => {
-            return (
-              <>
+        <div className="exterior-container" style={togleContainer}>
+          <div
+            className="imgContainer"
+            id="imgContainer"
+            onWheel={clickHandler}
+            style={divStyle}
+          >
+            <img
+              className="imageId"
+              src={urls[carsListId].wheel[carsWheelsId].photos[urlsId]}
+              alt=""
+              style={divStyle}
+            />
+          </div>
+
+          <div className="imageColorContainer">
+            {urls.map((item: any, index: any) => {
+              return (
+                <>
+                  <div
+                    className="imageColorItem"
+                    key={item.id}
+                    onClick={() => handleCarId(index)}
+                  >
+                    <img src={item.color} alt="" />
+                  </div>
+                </>
+              )
+            })}
+          </div>
+
+          {/* wheels */}
+
+          <div className="imageWheelsContainer">
+            {urls[carsListId]?.wheel?.map((item: any, index: any) => {
+              return (
                 <div
-                  className="imageColorItem"
-                  key={item.id}
-                  onClick={() => handleCarId(index)}
+                  className="imageWheelItem"
+                  key={index}
+                  onClick={() => setCarsWheelsId(index)}
                 >
-                  <img src={item.color} alt="" />
+                  <img src={item.imageWheel} alt="" />
                 </div>
-              </>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
 
-        {urls.map((item: any, index: any) => {
-          if (item[index] === carsListId) {
-            return (
-              <div
-                className="imgContainer"
-                ref={refContainer}
-                id="imgContainer"
-              >
-                <img
-                  src={urls[carsListId].wheel[carsWheelsId].photos[urlsId]}
-                  alt=""
-                />
-              </div>
-            )
-          }
-        })}
+        <div className="interior-container">
+          <div
+            className="imgContainer"
+            id="imgContainer"
+            onWheel={clickHandler}
+            style={divStyle}
+          >
+            <img
+              className="imageId"
+              src={
+                urls[carsListId].interior[0].items[upHolsteryId]
+                  .imageUpholsteryInterior
+              }
+              alt=""
+              style={divStyle}
+            />
+          </div>
 
-        {/* wheels */}
+          <div className="interior-upHolstery">
+            {urls[carsListId].interior[0].items.map((item: any, index: any) => {
+              return (
+                <div
+                  className="interiorUpholsteryImages"
+                  key={index}
+                  onClick={() => setUpHolsteryId(index)}
+                >
+                  <img
+                    className="interiorUpholsteryImg"
+                    src={item.imageUpholstery}
+                    alt=""
+                  />
+                </div>
+              )
+            })}
+          </div>
 
-        <div className="imageWheelsContainer">
-          {urls[carsListId]?.wheel?.map((item: any, index: any) => {
-            return (
-              <div
-                className="imageWheelItem"
-                key={index}
-                onClick={() => setCarsWheelsId(index)}
-              >
-                <img src={item.imageWheel} alt="" />
-              </div>
-            )
-          })}
-        </div>
-
-        <div>
-          <button onClick={moveRight}>right</button>
-          <button onClick={moveLeft}>left</button>
+          {/* <div className="interior-trims">
+            {urls[carsListId].interior[0].items[upHolsteryId].trims.map(
+              (item: any, index: any) => {
+                return (
+                  <div className="interiorTrimsImages">
+                    <img
+                      className="interiorTrimsImg"
+                      src={item.imageTrims}
+                      alt=""
+                    />
+                  </div>
+                )
+              }
+            )}
+          </div> */}
         </div>
       </div>
     </>
