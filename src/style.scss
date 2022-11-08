@@ -1,0 +1,46 @@
+.container {
+  width: 1200px;
+  overflow: hidden;
+
+  margin: 1rem;
+
+  .imgContainer {
+    border: 1px solid black;
+    padding: 1rem;
+    transform: 2s;
+    img {
+      transform: 2s;
+      border: 1px solid black;
+      width: 550px;
+    }
+  }
+}
+
+.imageColorContainer {
+  display: flex;
+  flex-direction: row;
+  // flex-wrap: wrap;
+  gap: 1rem;
+
+  .imageColorItem {
+    // width: 33%;
+
+    img {
+      width: 50px;
+    }
+  }
+}
+
+.imageWheelsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  .imageWheelItem {
+    // width: 33%;
+
+    img {
+      height: 100px;
+    }
+  }
+}
