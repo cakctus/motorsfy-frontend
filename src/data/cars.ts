@@ -261,6 +261,65 @@ export const cars: any = [
           "https://cache.bmwusa.com/cosy.arox?pov=driverdoor&brand=WBBM&vehicle=235D&client=byoc&paint=P0A96&fabric=FLCFI&sa=S01CE%252CS01WE%252CS0255%252CS02TB%252CS0302%252CS0319%252CS0322%252CS0346%252CS03AG%252CS0403%252CS0423%252CS0459%252CS0465%252CS0481%252CS04LH%252CS04T8%252CS04UR%252CS0508%252CS0534%252CS0552%252CS05AC%252CS05AS%252CS0676%252CS06AC%252CS06AK%252CS06C4%252CS06NS%252CS06U3%252CS0775&date=20220705&resp=jpg&quality=81&angle=50&width=2500",
       },
     ],
+    options: [
+      {
+        category: "safaty options",
+        optionList: [
+          {
+            title: "space-saver spare",
+            image:
+              "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byo&view=static&sa=S0300&vehicle=235C",
+            price: 250,
+            descripion: "Lorem10",
+          },
+        ],
+      },
+      {
+        category: "convenience options",
+        optionList: [
+          {
+            title: "remote engine start",
+            image:
+              "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byo&view=static&sa=S01CR&vehicle=235C",
+            price: 300,
+            description: "Lorem10",
+          },
+          {
+            title: "heated steering wheel",
+            image:
+              "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byo&view=static&sa=S0248&vehicle=235C",
+            price: 200,
+            description: "Lorem10",
+          },
+          {
+            title: "power rear sunshade rear side window shades",
+            image:
+              "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byo&view=static&sa=S0416&vehicle=235C",
+            price: 575,
+            description: "Lorem10",
+          },
+          {
+            title: "heated front seats",
+            image:
+              "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byo&view=static&sa=S0494&vehicle=235C",
+            price: 500,
+            description: "Lorem10",
+          },
+        ],
+      },
+      {
+        category: "performance options",
+        optionList: [
+          {
+            title: "M Sport Brakes with Blue Calipers",
+            image:
+              "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byo&view=static&sa=S02NH&vehicle=235C",
+            price: 650,
+            description: "Lorem10",
+          },
+        ],
+      },
+    ],
   },
   {
     id: 2,
@@ -488,6 +547,65 @@ export const cars: any = [
               "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byoc&view=tile_wide&sa=S04LH&vehicle=235D&resp=jpg&width=300",
             imageTrimsInterior:
               "https://cache.bmwusa.com/cosy.arox?pov=dashboard&brand=WBBM&vehicle=235D&client=byoc&paint=P0475&fabric=FKHSW&sa=S01CE%252CS01WE%252CS0255%252CS02TB%252CS0302%252CS0319%252CS0322%252CS0346%252CS03AG%252CS0403%252CS0423%252CS0459%252CS0465%252CS0481%252CS04LH%252CS04T8%252CS04UR%252CS0508%252CS0534%252CS0552%252CS05AC%252CS05AS%252CS0676%252CS06AC%252CS06AK%252CS06C4%252CS06NS%252CS06U3%252CS0775&date=20220705&resp=jpg&quality=81&angle=50&width=2500",
+          },
+        ],
+      },
+    ],
+    options: [
+      {
+        category: "safaty options",
+        optionList: [
+          {
+            title: "space-saver spare",
+            image:
+              "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byo&view=static&sa=S0300&vehicle=235C",
+            price: 250,
+            descripion: "Lorem10",
+          },
+        ],
+      },
+      {
+        category: "convenience options",
+        optionList: [
+          {
+            title: "remote engine start",
+            image:
+              "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byo&view=static&sa=S01CR&vehicle=235C",
+            price: 300,
+            description: "Lorem10",
+          },
+          {
+            title: "heated steering wheel",
+            image:
+              "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byo&view=static&sa=S0248&vehicle=235C",
+            price: 200,
+            description: "Lorem10",
+          },
+          {
+            title: "power rear sunshade rear side window shades",
+            image:
+              "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byo&view=static&sa=S0416&vehicle=235C",
+            price: 575,
+            description: "Lorem10",
+          },
+          {
+            title: "heated front seats",
+            image:
+              "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byo&view=static&sa=S0494&vehicle=235C",
+            price: 500,
+            description: "Lorem10",
+          },
+        ],
+      },
+      {
+        category: "performance options",
+        optionList: [
+          {
+            title: "M Sport Brakes with Blue Calipers",
+            image:
+              "https://cache.bmwusa.com/cosy.arox?brand=wbbm&client=byo&view=static&sa=S02NH&vehicle=235C",
+            price: 650,
+            description: "Lorem10",
           },
         ],
       },

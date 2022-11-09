@@ -20,6 +20,11 @@ function App() {
 
   const [togleType, setTogleType] = useState("Exterior")
 
+  const [optionsTypeToggle, setOptionsTypeToggle] = useState({
+    index: 0,
+    category: "All",
+  })
+
   const clickHandler = (e: any) => {
     if (e.deltaY > 0) {
       setUrlsId(urlsId - 1)
@@ -72,6 +77,15 @@ function App() {
     display: togleType === "Exterior" ? "block" : "none",
   }
 
+  const handleOptionsId = (id: any, category: any) => {
+    setOptionsTypeToggle({
+      index: id,
+      category: category,
+    })
+  }
+
+  console.log(optionsTypeToggle.category)
+
   return (
     <>
       <div className="container">
@@ -85,9 +99,17 @@ function App() {
           <div className="categories-interior">
             <p>Interior</p>
           </div>
+          <div className="categories-options">
+            <p>Options</p>
+          </div>
         </div>
 
-        <div className="exterior-container" style={togleContainer}>
+        <div
+          className="exterior-container"
+          style={{
+            display: togleType === "Exterior" ? "block" : "none",
+          }}
+        >
           <div
             className="imgContainer"
             id="imgContainer"
@@ -135,7 +157,12 @@ function App() {
           </div>
         </div>
 
-        <div className="interior-container">
+        <div
+          className="interior-container"
+          style={{
+            display: togleType === "Interior" ? "block" : "none",
+          }}
+        >
           {toggleInteriorPhoto ? (
             <div
               className="imgContainer"
@@ -205,6 +232,83 @@ function App() {
                   }
                 )
               : ""}
+          </div>
+        </div>
+
+        <div
+          className="options-container"
+          style={{
+            display: togleType === "Options" ? "block" : "none",
+          }}
+        >
+          <div className="options-category-list">
+            <div
+              className="options-category"
+              onClick={(e: any) => handleOptionsId(0, e.target.textContent)}
+            >
+              All
+            </div>
+            {urls[carsListId].options.map((item: any, index: any) => {
+              return (
+                <div
+                  className="options-category"
+                  key={index}
+                  onClick={(e: any) =>
+                    handleOptionsId(index, e.target.textContent)
+                  }
+                >
+                  {item.category}
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="options-items">
+            {optionsTypeToggle.category === "All"
+              ? urls[carsListId].options.map((item: any) => {
+                  return item.optionList.map((item: any, index: any) => {
+                    return (
+                      <div className="options-item" key={index}>
+                        <img src={item.image} className="options-img" alt="" />
+                        <p className="options-title">{item.title}</p>
+                        <p className="options-price">{item.price}</p>
+                        <p className="options-description">
+                          {item.description}
+                        </p>
+                      </div>
+                    )
+                  })
+                })
+              : urls[carsListId].options
+                  .filter(
+                    (item: any) => item.category === optionsTypeToggle.category
+                  )[0]
+                  .optionList.map((item: any, index: any) => {
+                    return (
+                      <div className="options-item" key={index}>
+                        <img src={item.image} className="options-img" alt="" />
+                        <p className="options-title">{item.title}</p>
+                        <p className="options-price">{item.price}</p>
+                        <p className="options-description">
+                          {item.description}
+                        </p>
+                      </div>
+                    )
+                  })}
+            {/* {urls[carsListId].options
+              .filter(
+                (item: any) => item.category === optionsTypeToggle.category
+              )[0]
+              .optionList.map((item: any, index: any) => {
+                return (
+                  <div className="options-item" key={index}>
+                    <img src={item.image} className="options-img" alt="" />
+                    <p className="options-title">{item.title}</p>
+                    <p className="options-price">{item.price}</p>
+                    <p className="options-description">{item.description}</p>
+                  </div>
+                )
+              })} */}
           </div>
         </div>
       </div>
