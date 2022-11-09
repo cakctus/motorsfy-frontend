@@ -15,6 +15,9 @@ function App() {
   const [carsWheelsId, setCarsWheelsId] = useState(0)
 
   const [upHolsteryId, setUpHolsteryId] = useState(0)
+  const [trimsId, setTrimsId] = useState(0)
+  const [toggleInteriorPhoto, setToggleInteriorPhoto] = useState(true)
+
   const [togleType, setTogleType] = useState("Exterior")
 
   const clickHandler = (e: any) => {
@@ -44,6 +47,18 @@ function App() {
   const handleCarId = (index: any) => {
     setCarsListId(index)
     setCarsWheelsId(0)
+  }
+
+  const handleUpHostery = (index: any) => {
+    setToggleInteriorPhoto(true)
+    setUpHolsteryId(index)
+    // setTrimsId(0)
+  }
+
+  const handleTrimId = (index: any) => {
+    setToggleInteriorPhoto(false)
+    // setUpHolsteryId(0)
+    setTrimsId(index)
   }
 
   const divStyle = {
@@ -121,30 +136,46 @@ function App() {
         </div>
 
         <div className="interior-container">
-          <div
-            className="imgContainer"
-            id="imgContainer"
-            onWheel={clickHandler}
-            style={divStyle}
-          >
-            <img
-              className="imageId"
-              src={
-                urls[carsListId].interior[0].items[upHolsteryId]
-                  .imageUpholsteryInterior
-              }
-              alt=""
+          {toggleInteriorPhoto ? (
+            <div
+              className="imgContainer"
+              id="imgContainer"
+              onWheel={clickHandler}
               style={divStyle}
-            />
-          </div>
+            >
+              <img
+                className="imageId"
+                src={
+                  urls[carsListId].interior[upHolsteryId]
+                    .imageUpholsteryInterior
+                }
+                alt=""
+                style={divStyle}
+              />
+            </div>
+          ) : (
+            <div className="imgContainer" id="imgContainer" style={divStyle}>
+              <img
+                className="imageId"
+                src={
+                  urls[carsListId].interior[upHolsteryId].trims !== undefined
+                    ? urls[carsListId].interior[upHolsteryId].trims[trimsId]
+                        .imageTrimsInterior
+                    : ""
+                }
+                alt=""
+                style={divStyle}
+              />
+            </div>
+          )}
 
           <div className="interior-upHolstery">
-            {urls[carsListId].interior[0].items.map((item: any, index: any) => {
+            {urls[carsListId].interior.map((item: any, index: any) => {
               return (
                 <div
                   className="interiorUpholsteryImages"
                   key={index}
-                  onClick={() => setUpHolsteryId(index)}
+                  onClick={() => handleUpHostery(index)}
                 >
                   <img
                     className="interiorUpholsteryImg"
@@ -155,22 +186,26 @@ function App() {
               )
             })}
           </div>
-
-          {/* <div className="interior-trims">
-            {urls[carsListId].interior[0].items[upHolsteryId].trims.map(
-              (item: any, index: any) => {
-                return (
-                  <div className="interiorTrimsImages">
-                    <img
-                      className="interiorTrimsImg"
-                      src={item.imageTrims}
-                      alt=""
-                    />
-                  </div>
+          <div className="interior-trims">
+            {urls[carsListId].interior[upHolsteryId].trims !== undefined
+              ? urls[carsListId].interior[upHolsteryId].trims.map(
+                  (item: any, index: any) => {
+                    return (
+                      <div
+                        className="interiorTrimsImages"
+                        onClick={() => handleTrimId(index)}
+                      >
+                        <img
+                          className="interiorTrimsImg"
+                          src={item.imageTrims}
+                          alt=""
+                        />
+                      </div>
+                    )
+                  }
                 )
-              }
-            )}
-          </div> */}
+              : ""}
+          </div>
         </div>
       </div>
     </>
@@ -194,5 +229,10 @@ function App() {
 //     }
 //   }
 // `
+
+// {
+//   urls[carsListId].interior[upHolsteryId].trims[trimsId]
+//     .imageTrimsInterior
+// }
 
 export default App
