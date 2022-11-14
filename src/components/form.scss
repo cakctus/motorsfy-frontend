@@ -1,0 +1,35 @@
+.dragNdropDiv {
+  margin-top: 1rem;
+  min-height: 200px;
+  white-space: pre;
+  border: 1px solid black;
+}
+
+#imgContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .imageContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .draggable {
+    width: 250px;
+    height: 150px;
+    padding: 0.5rem 1rem;
+    cursor: grabbing;
+  }
+  img {
+    width: 250px;
+    height: 150px;
+  }
+}
+
+.drag-over {
+  background-color: rgba(0, 0, 0, 0.1);
+}
