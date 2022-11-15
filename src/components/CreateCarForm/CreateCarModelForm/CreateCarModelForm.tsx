@@ -11,6 +11,7 @@ const CreateCarModelForm = ({ carModel }: Props) => {
           type="text"
           id="model"
           name="model"
+          placeholder="Car Model"
           onChange={(e) => carModel(e.target.value)}
         />
       </div>
