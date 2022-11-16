@@ -1,19 +1,13 @@
 import { useState, useReducer, useEffect } from "react"
+import Context, { ContextState } from "./formContext"
 import { Outlet } from "react-router-dom"
-import CreateCarNameForm from "./CreateCarNameForm/CreateCarNameForm"
-import CreateCarColorImage from "./CreateCarColorImageForm/CreateCarColorImage"
-import CreateCarModelForm from "./CreateCarModelForm/CreateCarModelForm"
-import CreateCarWheelForm from "./CreateCarWheelForm/CreateCarWheelForm"
-import CreateCarPhotosForm from "./CreateCarPhotosForm/CreateCarPhotosForm"
-import "../form.scss"
-import ImageUpHolsteryForm from "./InteriorForm/ImageUpHolsteryForm/ImageUpHolsteryForm"
-import ImageUpHolsteryInteriorForm from "./InteriorForm/ImageUpHolsteryForm/ImageUpHolsteryInteriorForm"
-import ImageTrimsForm from "./InteriorForm/ImageTrimsForm/ImageTrimsForm"
-import ImageTrimsInteriorForm from "./InteriorForm/ImageTrimsForm/ImageTrimsInteriorForm"
-import InteriorForm from "./InteriorForm/InteriorForm"
+
+import CarInfoForm from "./CreateCarInfoForm/CarInfoForm"
 import ExteriorForm from "./ExteriorForm/ExteriorForm"
-import Context from "./formContext"
-import { ContextState } from "./formContext"
+import InteriorForm from "./InteriorForm/InteriorForm"
+import OptionsForm from "./OptionsForm/OptionsForm"
+import "../form.scss"
+
 type Props = {}
 
 type State = {
@@ -27,8 +21,6 @@ const initialState = {
   wheel: [],
   photosCars: [],
   interior: [],
-  imageUpHolstery: "",
-  imageUpHolsteryInterior: "",
   imageTrims: "",
   imageTrimsInterior: "",
 }
@@ -52,10 +44,6 @@ function reducer(state: any, action: Action) {
         car: action.payload,
       }
     case "CARS_PHOTOS":
-      const arr = []
-      for (let i = 0; i < action.payload.length; i++) {
-        arr.push(String(action.payload[i]))
-      }
       return {
         ...state,
         photosCars: action.payload,
@@ -101,54 +89,59 @@ function reducer(state: any, action: Action) {
 
 const Form = (props: Props) => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  const [photos, setPhotos] = useState<any>([])
+  const [cars, setCars] = useState<any>([])
+  const [wheel, setWheel] = useState<any>([])
   const [upHolsteryPhotos, setUpHolsteryPhotos] = useState<any>({})
   const [interior, setInterior] = useState<any>([])
   const [trimInterior, setTrimInterior] = useState<any>([])
-  // const [uploadedImage, setUploadedImage] = useState<any[]>([])
-  const [dynamicAddWheel, setDynamicAddWheel] = useState<any>([])
+  const [categoryOptions, setCategoryOptions] = useState<any>()
+  const [optionList, setOptionList] = useState<any>([])
+
+  const [linkState, setLinkState] = useState<string>("Info")
 
   const carName = (car: string) => {
+    setCars((prev: any) => ({
+      ...prev,
+      car: car,
+    }))
     dispatch({ type: "CAR", payload: car })
   }
 
   const carModel = (model: string) => {
+    setCars((prev: any) => ({
+      ...prev,
+      model: model,
+    }))
     dispatch({ type: "MODEL", payload: model })
   }
 
-  const carPhotoImage = (carPhotoImageFile: string) => {
+  const carColorImage = (carPhotoImageFile: string) => {
+    setCars((prev: any) => ({
+      ...prev,
+      color: carPhotoImageFile,
+    }))
     dispatch({ type: "CAR_PHOTO_IMAGE", payload: carPhotoImageFile })
   }
 
   const carWheel = (wheel: any, photosCar: any) => {
     const obj = {
       imageWheel: wheel,
-      photoss: photosCar,
+      photos: photosCar,
     }
-    setPhotos((prev: any) => [...prev, obj])
-    dispatch({ type: "WHEEL", payload: photos })
+    setWheel((prev: any) => [...prev, obj])
+    dispatch({ type: "WHEEL", payload: wheel })
   }
 
-  // useEffect(() => {
-  // dispatch({ type: "CARS_PHOTOS", payload: uploadedImage })
-  // }, [uploadedImage])
-
-  const carPhotos = (photos: any) => {
-    // console.log(photos, "photos")
-    // setPhotos(photos)
-    // setPhotos((prev: any) => [...prev], photos)
-    dispatch({
-      type: "CARS_PHOTOS",
-      payload: photos,
-    })
-  }
+  // const carPhotos = (photos: any) => {
+  //   dispatch({ type: "CARS_PHOTOS", payload: photos })
+  // }
 
   const carImageUpHolstery = (upholstery: any) => {
     setUpHolsteryPhotos((prev: any) => ({
       ...prev,
       imageUpHolstery: upholstery,
     }))
-    dispatch({ type: "IMAGE_UPHOLSTERY", payload: upholstery })
+    // dispatch({ type: "IMAGE_UPHOLSTERY", payload: upholstery })
   }
 
   const carImageUpHolsteryInterior = (upholstery: any) => {
@@ -156,7 +149,7 @@ const Form = (props: Props) => {
       ...prev,
       imageUpHolsteryInterior: upholstery,
     }))
-    dispatch({ type: "IMAGE_UPHOLSTERY_INTERIOR", payload: upholstery })
+    // dispatch({ type: "IMAGE_UPHOLSTERY_INTERIOR", payload: upholstery })
   }
 
   const carImageTrims = (trimsImage: any, trimsInterior: any) => {
@@ -164,7 +157,6 @@ const Form = (props: Props) => {
       imageTrims: trimsImage,
       imageTrimsInterior: trimsInterior,
     }
-    // setInterior(obj)
     dispatch({ type: "IMAGE_TRIMS", payload: obj })
   }
 
@@ -187,10 +179,32 @@ const Form = (props: Props) => {
     setInterior([])
   }
 
+  const optionsListArray = (obj: any) => {
+    const o = { ...obj }
+    setOptionList((prev: any) => [...prev, o])
+  }
+
   useEffect(() => {
-    state.wheel = photos
+    state.wheel = wheel
     state.interior = trimInterior
-  }, [photos, trimInterior])
+    state.options = [
+      {
+        category: categoryOptions,
+        optionList: optionList,
+      },
+    ]
+    setCars((prev: any) => ({
+      ...prev,
+      wheel: wheel,
+      interior: trimInterior,
+      options: [
+        {
+          category: categoryOptions,
+          optionList: optionList,
+        },
+      ],
+    }))
+  }, [wheel, trimInterior, categoryOptions, optionList])
 
   const AppContext: ContextState = {
     setInterior,
@@ -198,26 +212,58 @@ const Form = (props: Props) => {
     setTrimInterior,
     trimInteriorFunc,
     interior,
+    setCategoryOptions,
+    optionsListArray,
   }
 
-  console.log(state)
-  // console.log(photos)
-  // console.log(trimInterior)
-  // console.log(interior)
+  console.log(cars)
 
   return (
     <>
       <Context.Provider value={AppContext}>
-        <CreateCarNameForm carName={carName} />
-        <CreateCarModelForm carModel={carModel} />
-        <CreateCarColorImage carPhotoImage={carPhotoImage} />
-        <ExteriorForm carWheel={carWheel} />
-        <InteriorForm
-          carImageUpHolstery={carImageUpHolstery}
-          carImageUpHolsteryInterior={carImageUpHolsteryInterior}
-          carImageTrims={carImageTrims}
-          carImageTrimsInterior={carImageTrimsInterior}
-        />
+        <div
+          style={{ display: "flex", gap: "1rem" }}
+          onClick={(e: any) => setLinkState(e.target.textContent)}
+        >
+          {["Info", "Interior", "Exterior", "Options"].map(
+            (item: string, index: number) => {
+              return <p key={index}>{item}</p>
+            }
+          )}
+        </div>
+        <div
+          className="carinfo-form"
+          style={{ display: linkState === "Info" ? "block" : "none" }}
+        >
+          <CarInfoForm
+            carName={carName}
+            carModel={carModel}
+            carPhotoImage={carColorImage}
+          />
+        </div>
+        <div
+          className="exterior-form"
+          style={{ display: linkState === "Exterior" ? "block" : "none" }}
+        >
+          <ExteriorForm carWheel={carWheel} />
+        </div>
+        <div
+          className="interior-form"
+          style={{ display: linkState === "Interior" ? "block" : "none" }}
+        >
+          <InteriorForm
+            carImageUpHolstery={carImageUpHolstery}
+            carImageUpHolsteryInterior={carImageUpHolsteryInterior}
+            carImageTrims={carImageTrims}
+            carImageTrimsInterior={carImageTrimsInterior}
+          />
+        </div>
+        <div
+          className="options-form"
+          style={{ display: linkState === "Options" ? "block" : "none" }}
+        >
+          <OptionsForm />
+        </div>
         <div id="detail">
           <Outlet />
         </div>

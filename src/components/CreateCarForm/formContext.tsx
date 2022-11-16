@@ -6,6 +6,8 @@ export interface ContextState {
   setTrimInterior: any
   trimInteriorFunc: any
   interior: any
+  setCategoryOptions: any
+  optionsListArray: any
 }
 
 const Context = createContext<ContextState | null>(null)

@@ -7,7 +7,6 @@ type Props = {
 
 const ImageUpHolsteryForm = ({ carImageUpHolstery }: Props) => {
   const appContext = useContext(Context)
-  console.log(appContext)
   const [upHolstery, setUpholstery] = useState<any>()
 
   const previewFile = (e: any) => {

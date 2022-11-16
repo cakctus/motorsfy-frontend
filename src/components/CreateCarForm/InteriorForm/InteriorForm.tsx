@@ -1,6 +1,4 @@
 import { useState } from "react"
-import ImageTrimsForm from "./ImageTrimsForm/ImageTrimsForm"
-import ImageTrimsInteriorForm from "./ImageTrimsForm/ImageTrimsInteriorForm"
 import ImageUpHolsteryForm from "./ImageUpHolsteryForm/ImageUpHolsteryForm"
 import ImageUpHolsteryInteriorForm from "./ImageUpHolsteryForm/ImageUpHolsteryInteriorForm"
 import InteriorFormDublicate from "./InteriorFormDublicate"
@@ -9,7 +7,7 @@ type Props = {
   carImageUpHolstery: (upholstery: any) => void
   carImageUpHolsteryInterior: (upholstery: any) => void
   carImageTrims: (trimsImage: any, trimsInterior: any) => void
-  carImageTrimsInterior: (imageTrimsInterior: any) => void
+  carImageTrimsInterior?: (imageTrimsInterior: any) => void
 }
 
 const InteriorForm = ({
@@ -19,16 +17,10 @@ const InteriorForm = ({
   carImageTrimsInterior,
 }: Props) => {
   const [dynamicAddUpHolstery, setDynamicAddUpHolstery] = useState<any>([])
-  const [dynamicAddTrims, setDynamicAddTrims] = useState<any>([])
 
   const handleDynamicUpHolstery = () => {
     const res = [...dynamicAddUpHolstery, []]
     setDynamicAddUpHolstery(res)
-  }
-
-  const handleDynamicTrims = () => {
-    const res = [...dynamicAddTrims, []]
-    setDynamicAddTrims(res)
   }
 
   return (
