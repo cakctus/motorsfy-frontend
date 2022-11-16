@@ -8,7 +8,7 @@ import InteriorFormDublicate from "./InteriorFormDublicate"
 type Props = {
   carImageUpHolstery: (upholstery: any) => void
   carImageUpHolsteryInterior: (upholstery: any) => void
-  carImageTrims: (trims: any) => void
+  carImageTrims: (trimsImage: any, trimsInterior: any) => void
   carImageTrimsInterior: (imageTrimsInterior: any) => void
 }
 

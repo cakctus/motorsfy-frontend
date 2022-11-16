@@ -12,19 +12,20 @@ const ImageUpHolsteryInteriorForm = ({ carImageUpHolsteryInterior }: Props) => {
 
     reader.addEventListener("load", () => {
       setUpHolsteryInterior(reader.result)
+      carImageUpHolsteryInterior(reader.result)
     })
 
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0])
     }
 
-    carImageUpHolsteryInterior(e.target.files[0])
+    // carImageUpHolsteryInterior(e.target.files[0])
   }
 
   return (
     <>
       <div>
-        <label htmlFor="upholstery">Choose upholstery image</label>
+        <label htmlFor="upholstery">Choose upholstery interior image</label>
         <input
           type="file"
           id="upholstery"

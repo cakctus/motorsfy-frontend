@@ -13,13 +13,14 @@ const CreateCarColorImage = ({ carPhotoImage }: Props) => {
 
     reader.addEventListener("load", () => {
       setCarColorImage(reader.result)
+      carPhotoImage(reader.result)
     })
 
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0])
     }
 
-    carPhotoImage(e.target.files[0])
+    // carPhotoImage(e.target.files[0])
   }
 
   return (

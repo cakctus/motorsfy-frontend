@@ -1,17 +1,21 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import Context from "../../formContext"
 
 type Props = {
   carImageTrims: (trims: any) => void
+  setImageTrims: any
 }
 
-const ImageTrimsForm = ({ carImageTrims }: Props) => {
-  const [imageTrims, setImageTrims] = useState<any>()
+const ImageTrimsForm = ({ carImageTrims, setImageTrims }: Props) => {
+  const appContext = useContext(Context)
+  const [image, setImage] = useState<any>()
 
   const previewFile = (e: any) => {
     const reader = new FileReader()
 
     reader.addEventListener("load", () => {
-      imageTrims(reader.result)
+      setImage(reader.result)
+      setImageTrims(reader.result)
     })
 
     if (e.target.files[0]) {
@@ -31,7 +35,8 @@ const ImageTrimsForm = ({ carImageTrims }: Props) => {
           name="upholstery"
           onChange={(e) => previewFile(e)}
         />
-        <img src={imageTrims} alt="" />
+        <img src={image} alt="" />
+        <br />
       </div>
     </>
   )
