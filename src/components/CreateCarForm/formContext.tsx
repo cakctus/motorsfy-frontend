@@ -8,6 +8,8 @@ export interface ContextState {
   interior: any
   setCategoryOptions: any
   optionsListArray: any
+  cars: any
+  saveOptionObject: () => void
 }
 
 const Context = createContext<ContextState | null>(null)

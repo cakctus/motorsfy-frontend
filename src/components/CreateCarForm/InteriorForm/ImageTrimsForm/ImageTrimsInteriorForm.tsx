@@ -3,12 +3,12 @@ import Context from "../../formContext"
 import ImageTrimsForm from "./ImageTrimsForm"
 
 type Props = {
-  carImageTrimsInterior: (imageTrimsInterior: any) => void
+  // carImageTrimsInterior: (imageTrimsInterior: any) => void
   setImageTrimsInterior: any
 }
 
 const ImageTrimsInteriorForm = ({
-  carImageTrimsInterior,
+  // carImageTrimsInterior,
   setImageTrimsInterior,
 }: Props) => {
   const appContext = useContext(Context)
@@ -26,7 +26,7 @@ const ImageTrimsInteriorForm = ({
       reader.readAsDataURL(e.target.files[0])
     }
 
-    carImageTrimsInterior(e.target.files[0])
+    // carImageTrimsInterior(e.target.files[0])
   }
 
   return (

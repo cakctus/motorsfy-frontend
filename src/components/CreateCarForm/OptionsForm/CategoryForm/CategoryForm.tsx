@@ -9,13 +9,25 @@ const CategoryForm = (props: Props) => {
   return (
     <>
       <div>
-        <label htmlFor="category">Category</label>
-        <input
-          type="text"
-          id="category"
-          name="category"
-          onChange={(e: any) => context?.setCategoryOptions(e.target.value)}
-        />
+        <div>
+          <label htmlFor="model">Model:</label>
+          <select name="model" id="model">
+            <option value={context?.cars.model}>{context?.cars.model}</option>
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="category">Category</label>
+          <input
+            type="text"
+            id="category"
+            name="category"
+            onChange={(e: any) => context?.setCategoryOptions(e.target.value)}
+          />
+        </div>
+        <button onClick={() => context?.saveOptionObject()}>
+          save category
+        </button>
       </div>
     </>
   )

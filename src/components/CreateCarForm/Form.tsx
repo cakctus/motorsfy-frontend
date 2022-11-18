@@ -10,92 +10,98 @@ import "../form.scss"
 
 type Props = {}
 
-type State = {
-  car: string
-}
+// type State = {
+//   car: string
+// }
 
-const initialState = {
-  car: "BMW",
-  model: "5 series 540i",
-  colorImage: "",
-  wheel: [],
-  photosCars: [],
-  interior: [],
-  imageTrims: "",
-  imageTrimsInterior: "",
-}
+// const initialState = {
+//   car: "BMW",
+//   model: "5 series 540i",
+//   colorImage: "",
+//   wheel: [],
+//   photosCars: [],
+//   interior: [],
+//   imageTrims: "",
+//   imageTrimsInterior: "",
+// }
 
-type Action =
-  | { type: "CAR"; payload: string }
-  | { type: "CARS_PHOTOS"; payload: any }
-  | { type: "CAR_PHOTO_IMAGE"; payload: any }
-  | { type: "MODEL"; payload: any }
-  | { type: "WHEEL"; payload: any }
-  | { type: "IMAGE_UPHOLSTERY"; payload: any }
-  | { type: "IMAGE_UPHOLSTERY_INTERIOR"; payload: any }
-  | { type: "IMAGE_TRIMS"; payload: any }
-  | { type: "IMAGE_TRIMS_INTERIOR"; payload: any }
+// type Action =
+//   | { type: "CAR"; payload: string }
+//   | { type: "CARS_PHOTOS"; payload: any }
+//   | { type: "CAR_PHOTO_IMAGE"; payload: any }
+//   | { type: "MODEL"; payload: any }
+//   | { type: "WHEEL"; payload: any }
+//   | { type: "IMAGE_UPHOLSTERY"; payload: any }
+//   | { type: "IMAGE_UPHOLSTERY_INTERIOR"; payload: any }
+//   | { type: "IMAGE_TRIMS"; payload: any }
+//   | { type: "IMAGE_TRIMS_INTERIOR"; payload: any }
 
-function reducer(state: any, action: Action) {
-  switch (action.type) {
-    case "CAR":
-      return {
-        ...state,
-        car: action.payload,
-      }
-    case "CARS_PHOTOS":
-      return {
-        ...state,
-        photosCars: action.payload,
-      }
-    case "CAR_PHOTO_IMAGE":
-      return {
-        ...state,
-        colorImage: action.payload,
-      }
-    case "MODEL":
-      return {
-        ...state,
-        model: action.payload,
-      }
-    case "WHEEL":
-      return {
-        ...state,
-        wheel: action.payload,
-      }
-    case "IMAGE_UPHOLSTERY":
-      return {
-        ...state,
-        imageUpHolstery: action.payload,
-      }
-    case "IMAGE_UPHOLSTERY_INTERIOR":
-      return {
-        ...state,
-        imageUpHolsteryInterior: action.payload,
-      }
-    case "IMAGE_TRIMS":
-      return {
-        ...state,
-        imageTrims: action.payload,
-      }
+// function reducer(state: any, action: Action) {
+//   switch (action.type) {
+//     case "CAR":
+//       return {
+//         ...state,
+//         car: action.payload,
+//       }
+//     case "CARS_PHOTOS":
+//       return {
+//         ...state,
+//         photosCars: action.payload,
+//       }
+//     case "CAR_PHOTO_IMAGE":
+//       return {
+//         ...state,
+//         colorImage: action.payload,
+//       }
+//     case "MODEL":
+//       return {
+//         ...state,
+//         model: action.payload,
+//       }
+//     case "WHEEL":
+//       return {
+//         ...state,
+//         wheel: action.payload,
+//       }
+//     case "IMAGE_UPHOLSTERY":
+//       return {
+//         ...state,
+//         imageUpHolstery: action.payload,
+//       }
+//     case "IMAGE_UPHOLSTERY_INTERIOR":
+//       return {
+//         ...state,
+//         imageUpHolsteryInterior: action.payload,
+//       }
+//     case "IMAGE_TRIMS":
+//       return {
+//         ...state,
+//         imageTrims: action.payload,
+//       }
 
-    case "IMAGE_TRIMS_INTERIOR":
-      return {
-        ...state,
-        imageTrimsInterior: action.payload,
-      }
-  }
-}
+//     case "IMAGE_TRIMS_INTERIOR":
+//       return {
+//         ...state,
+//         imageTrimsInterior: action.payload,
+//       }
+//   }
+// }
 
 const Form = (props: Props) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  // const [state, dispatch] = useReducer(reducer, initialState)
+  // car
   const [cars, setCars] = useState<any>([])
+  // exterior
   const [wheel, setWheel] = useState<any>([])
+  // interior
   const [upHolsteryPhotos, setUpHolsteryPhotos] = useState<any>({})
+  const [imageTrimsObject, setImageTrimsObject] = useState<any>([])
   const [interior, setInterior] = useState<any>([])
   const [trimInterior, setTrimInterior] = useState<any>([])
+  // option
   const [categoryOptions, setCategoryOptions] = useState<any>()
   const [optionList, setOptionList] = useState<any>([])
+  const [optionsObject, setObjectsObject] = useState<any>([])
 
   const [linkState, setLinkState] = useState<string>("Info")
 
@@ -104,7 +110,7 @@ const Form = (props: Props) => {
       ...prev,
       car: car,
     }))
-    dispatch({ type: "CAR", payload: car })
+    // dispatch({ type: "CAR", payload: car })
   }
 
   const carModel = (model: string) => {
@@ -112,7 +118,7 @@ const Form = (props: Props) => {
       ...prev,
       model: model,
     }))
-    dispatch({ type: "MODEL", payload: model })
+    // dispatch({ type: "MODEL", payload: model })
   }
 
   const carColorImage = (carPhotoImageFile: string) => {
@@ -120,7 +126,7 @@ const Form = (props: Props) => {
       ...prev,
       color: carPhotoImageFile,
     }))
-    dispatch({ type: "CAR_PHOTO_IMAGE", payload: carPhotoImageFile })
+    // dispatch({ type: "CAR_PHOTO_IMAGE", payload: carPhotoImageFile })
   }
 
   const carWheel = (wheel: any, photosCar: any) => {
@@ -129,7 +135,7 @@ const Form = (props: Props) => {
       photos: photosCar,
     }
     setWheel((prev: any) => [...prev, obj])
-    dispatch({ type: "WHEEL", payload: wheel })
+    // dispatch({ type: "WHEEL", payload: wheel })
   }
 
   // const carPhotos = (photos: any) => {
@@ -157,15 +163,17 @@ const Form = (props: Props) => {
       imageTrims: trimsImage,
       imageTrimsInterior: trimsInterior,
     }
-    dispatch({ type: "IMAGE_TRIMS", payload: obj })
+    setImageTrimsObject(obj)
+    // dispatch({ type: "IMAGE_TRIMS", payload: obj })
   }
 
-  const carImageTrimsInterior = (imageTrimsInterior: any) => {
-    dispatch({ type: "IMAGE_TRIMS_INTERIOR", payload: imageTrimsInterior })
-  }
+  // const carImageTrimsInterior = (imageTrimsInterior: any) => {
+  //   dispatch({ type: "IMAGE_TRIMS_INTERIOR", payload: imageTrimsInterior })
+  // }
 
   const trimInteriorFunc = () => {
-    const obj = { ...state.imageTrims }
+    // const obj = { ...state.imageTrims }
+    const obj = { ...imageTrimsObject }
     setInterior((prev: any) => [...prev, obj])
   }
 
@@ -184,27 +192,35 @@ const Form = (props: Props) => {
     setOptionList((prev: any) => [...prev, o])
   }
 
+  const saveOptionObject = () => {
+    const option = {
+      category: categoryOptions,
+      optionList: optionList,
+    }
+    setObjectsObject((prev: any) => [...prev, option])
+  }
   useEffect(() => {
-    state.wheel = wheel
-    state.interior = trimInterior
-    state.options = [
-      {
-        category: categoryOptions,
-        optionList: optionList,
-      },
-    ]
+    // state.wheel = wheel
+    // state.interior = trimInterior
+    // state.options = [
+    //   {
+    //     category: categoryOptions,
+    //     optionList: optionList,
+    //   },
+    // ]
     setCars((prev: any) => ({
       ...prev,
       wheel: wheel,
       interior: trimInterior,
-      options: [
-        {
-          category: categoryOptions,
-          optionList: optionList,
-        },
-      ],
+      // options: [
+      //   {
+      //     category: categoryOptions,
+      //     optionList: optionList,
+      //   },
+      // ],
+      options: optionsObject,
     }))
-  }, [wheel, trimInterior, categoryOptions, optionList])
+  }, [wheel, trimInterior, categoryOptions, optionList, optionsObject])
 
   const AppContext: ContextState = {
     setInterior,
@@ -214,20 +230,30 @@ const Form = (props: Props) => {
     interior,
     setCategoryOptions,
     optionsListArray,
+    cars,
+    saveOptionObject,
   }
 
-  console.log(cars)
+  console.log(linkState)
 
   return (
     <>
       <Context.Provider value={AppContext}>
-        <div
-          style={{ display: "flex", gap: "1rem" }}
-          onClick={(e: any) => setLinkState(e.target.textContent)}
-        >
+        <div style={{ display: "flex", gap: "1rem" }}>
           {["Info", "Interior", "Exterior", "Options"].map(
             (item: string, index: number) => {
-              return <p key={index}>{item}</p>
+              return (
+                <p
+                  key={index}
+                  onClick={(e: any) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    setLinkState(e.target.innerText)
+                  }}
+                >
+                  {item}
+                </p>
+              )
             }
           )}
         </div>
@@ -255,7 +281,7 @@ const Form = (props: Props) => {
             carImageUpHolstery={carImageUpHolstery}
             carImageUpHolsteryInterior={carImageUpHolsteryInterior}
             carImageTrims={carImageTrims}
-            carImageTrimsInterior={carImageTrimsInterior}
+            // carImageTrimsInterior={carImageTrimsInterior}
           />
         </div>
         <div

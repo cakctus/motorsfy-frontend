@@ -7,15 +7,15 @@ type Props = {
   carImageUpHolstery: (upholstery: any) => void
   carImageUpHolsteryInterior: (upholstery: any) => void
   carImageTrims: (trimsImage: any, trimsInterior: any) => void
-  carImageTrimsInterior?: (imageTrimsInterior: any) => void
+  // carImageTrimsInterior?: (imageTrimsInterior: any) => void
 }
 
 const InteriorForm = ({
   carImageUpHolstery,
   carImageUpHolsteryInterior,
   carImageTrims,
-  carImageTrimsInterior,
-}: Props) => {
+}: // carImageTrimsInterior,
+Props) => {
   const [dynamicAddUpHolstery, setDynamicAddUpHolstery] = useState<any>([])
 
   const handleDynamicUpHolstery = () => {
@@ -35,7 +35,7 @@ const InteriorForm = ({
             />
             <InteriorFormDublicate
               carImageTrims={carImageTrims}
-              carImageTrimsInterior={carImageTrimsInterior}
+              // carImageTrimsInterior={carImageTrimsInterior}
             />
             <hr />
           </>

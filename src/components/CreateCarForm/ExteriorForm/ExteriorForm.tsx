@@ -6,7 +6,7 @@ type Props = {
 }
 
 const ExteriorForm = ({ carWheel }: Props) => {
-  const [dynamicAddWheel, setDynamicAddWheel] = useState<any>([])
+  const [dynamicAddWheel, setDynamicAddWheel] = useState<any>([[]])
 
   const handleAddDynamic = () => {
     const res = [...dynamicAddWheel, []]
@@ -15,7 +15,7 @@ const ExteriorForm = ({ carWheel }: Props) => {
 
   return (
     <div>
-      <button onClick={() => handleAddDynamic()}>add wheel</button>
+      {/* <button onClick={() => handleAddDynamic()}>add wheel</button> */}
       {dynamicAddWheel.map((data: any, i: number) => {
         return (
           <>

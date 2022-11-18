@@ -5,12 +5,12 @@ import ImageTrimsInteriorForm from "./ImageTrimsForm/ImageTrimsInteriorForm"
 
 type Props = {
   carImageTrims: any
-  carImageTrimsInterior: any
+  // carImageTrimsInterior: any
 }
 
 const InteriorFormDublicate = ({
   carImageTrims,
-  carImageTrimsInterior,
+  // carImageTrimsInterior,
 }: Props) => {
   const appContext = useContext(Context)
   const [val, setVal] = useState<any>([])
@@ -37,7 +37,7 @@ const InteriorFormDublicate = ({
               setImageTrims={setImageTrims}
             />
             <ImageTrimsInteriorForm
-              carImageTrimsInterior={carImageTrimsInterior}
+              // carImageTrimsInterior={carImageTrimsInterior}
               setImageTrimsInterior={setImageTrimsInterior}
             />
             <button onClick={() => appContext?.trimInteriorFunc()}>done</button>
