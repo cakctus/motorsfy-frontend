@@ -5,13 +5,9 @@ import ImageTrimsInteriorForm from "./ImageTrimsForm/ImageTrimsInteriorForm"
 
 type Props = {
   carImageTrims: any
-  // carImageTrimsInterior: any
 }
 
-const InteriorFormDublicate = ({
-  carImageTrims,
-  // carImageTrimsInterior,
-}: Props) => {
+const InteriorFormDublicate = ({ carImageTrims }: Props) => {
   const appContext = useContext(Context)
   const [val, setVal] = useState<any>([])
   const [imageTrims, setImageTrims] = useState<any>()

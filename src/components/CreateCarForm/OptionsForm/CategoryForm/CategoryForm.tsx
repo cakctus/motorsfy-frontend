@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import Context from "../../formContext"
+import styles from "./style.module.scss"
 
 type Props = {}
 
@@ -8,7 +9,7 @@ const CategoryForm = (props: Props) => {
 
   return (
     <>
-      <div>
+      <div className={styles.categoryForm}>
         <div>
           <label htmlFor="model">Model:</label>
           <select name="model" id="model">

@@ -5,7 +5,7 @@ import OptionListItemForm from "./OptionListItemForm"
 type Props = {}
 
 const OptionListForm = (props: Props) => {
-  const [val, setVal] = useState<any>([])
+  const [val, setVal] = useState<any>([[]])
 
   const handleVal = () => {
     const prevVal = [...val, []]
@@ -14,9 +14,17 @@ const OptionListForm = (props: Props) => {
 
   return (
     <>
-      <button onClick={() => handleVal()}>add</button>
       {val.map((item: any, index: number) => {
-        return <OptionListItemForm />
+        return (
+          <>
+            <OptionListItemForm />
+            <div>
+              <br />
+              <button onClick={() => handleVal()}>add</button>
+            </div>
+            <hr />
+          </>
+        )
       })}
     </>
   )

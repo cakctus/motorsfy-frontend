@@ -1,9 +1,7 @@
-import React, { useState, useRef, useEffect } from "react"
-import { ReactSortable, Sortable } from "react-sortablejs"
+import { useState, useRef, useEffect } from "react"
+import { ReactSortable } from "react-sortablejs"
 
 type Props = {
-  // uploadedImage: any
-  // setUploadedImage: any
   carPhotos: (photos: any) => void
 }
 

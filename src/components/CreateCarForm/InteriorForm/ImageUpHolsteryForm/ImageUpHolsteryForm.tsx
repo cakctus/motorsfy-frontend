@@ -1,12 +1,10 @@
 import { useState, useContext } from "react"
 import Context from "../../formContext"
 
-type Props = {
-  carImageUpHolstery: (upholstery: any) => void
-}
+type Props = {}
 
-const ImageUpHolsteryForm = ({ carImageUpHolstery }: Props) => {
-  const appContext = useContext(Context)
+const ImageUpHolsteryForm = (props: Props) => {
+  const context = useContext(Context)
   const [upHolstery, setUpholstery] = useState<any>()
 
   const previewFile = (e: any) => {
@@ -14,14 +12,12 @@ const ImageUpHolsteryForm = ({ carImageUpHolstery }: Props) => {
 
     reader.addEventListener("load", () => {
       setUpholstery(reader.result)
-      carImageUpHolstery(reader.result)
+      context?.carImageUpHolstery(reader.result)
     })
 
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0])
     }
-
-    // carImageUpHolstery(e.target.files[0])
   }
 
   return (

@@ -223,6 +223,12 @@ const Form = (props: Props) => {
   }, [wheel, trimInterior, categoryOptions, optionList, optionsObject])
 
   const AppContext: ContextState = {
+    carName,
+    carModel,
+    carColorImage,
+    carWheel,
+    carImageUpHolstery,
+    carImageUpHolsteryInterior,
     setInterior,
     interiorCar,
     setTrimInterior,
@@ -234,13 +240,14 @@ const Form = (props: Props) => {
     saveOptionObject,
   }
 
-  console.log(linkState)
+  // console.log(linkState)
+  console.log(cars)
 
   return (
     <>
       <Context.Provider value={AppContext}>
         <div style={{ display: "flex", gap: "1rem" }}>
-          {["Info", "Interior", "Exterior", "Options"].map(
+          {["Info", "Exterior", "Interior", "Options"].map(
             (item: string, index: number) => {
               return (
                 <p
@@ -261,28 +268,19 @@ const Form = (props: Props) => {
           className="carinfo-form"
           style={{ display: linkState === "Info" ? "block" : "none" }}
         >
-          <CarInfoForm
-            carName={carName}
-            carModel={carModel}
-            carPhotoImage={carColorImage}
-          />
+          <CarInfoForm />
         </div>
         <div
           className="exterior-form"
           style={{ display: linkState === "Exterior" ? "block" : "none" }}
         >
-          <ExteriorForm carWheel={carWheel} />
+          <ExteriorForm />
         </div>
         <div
           className="interior-form"
           style={{ display: linkState === "Interior" ? "block" : "none" }}
         >
-          <InteriorForm
-            carImageUpHolstery={carImageUpHolstery}
-            carImageUpHolsteryInterior={carImageUpHolsteryInterior}
-            carImageTrims={carImageTrims}
-            // carImageTrimsInterior={carImageTrimsInterior}
-          />
+          <InteriorForm carImageTrims={carImageTrims} />
         </div>
         <div
           className="options-form"

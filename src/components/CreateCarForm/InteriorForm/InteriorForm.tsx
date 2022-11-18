@@ -4,19 +4,11 @@ import ImageUpHolsteryInteriorForm from "./ImageUpHolsteryForm/ImageUpHolsteryIn
 import InteriorFormDublicate from "./InteriorFormDublicate"
 
 type Props = {
-  carImageUpHolstery: (upholstery: any) => void
-  carImageUpHolsteryInterior: (upholstery: any) => void
   carImageTrims: (trimsImage: any, trimsInterior: any) => void
-  // carImageTrimsInterior?: (imageTrimsInterior: any) => void
 }
 
-const InteriorForm = ({
-  carImageUpHolstery,
-  carImageUpHolsteryInterior,
-  carImageTrims,
-}: // carImageTrimsInterior,
-Props) => {
-  const [dynamicAddUpHolstery, setDynamicAddUpHolstery] = useState<any>([])
+const InteriorForm = ({ carImageTrims }: Props) => {
+  const [dynamicAddUpHolstery, setDynamicAddUpHolstery] = useState<any>([[]])
 
   const handleDynamicUpHolstery = () => {
     const res = [...dynamicAddUpHolstery, []]
@@ -25,18 +17,17 @@ Props) => {
 
   return (
     <>
-      <button onClick={() => handleDynamicUpHolstery()}>add upholstery</button>
       {dynamicAddUpHolstery.map((item: any, i: number) => {
         return (
           <>
-            <ImageUpHolsteryForm carImageUpHolstery={carImageUpHolstery} />
-            <ImageUpHolsteryInteriorForm
-              carImageUpHolsteryInterior={carImageUpHolsteryInterior}
-            />
-            <InteriorFormDublicate
-              carImageTrims={carImageTrims}
-              // carImageTrimsInterior={carImageTrimsInterior}
-            />
+            <ImageUpHolsteryForm />
+            <ImageUpHolsteryInteriorForm />
+            <InteriorFormDublicate carImageTrims={carImageTrims} />
+            <div>
+              <button onClick={() => handleDynamicUpHolstery()}>
+                add upholstery
+              </button>
+            </div>
             <hr />
           </>
         )

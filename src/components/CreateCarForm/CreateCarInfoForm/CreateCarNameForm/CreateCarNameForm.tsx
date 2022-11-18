@@ -1,8 +1,11 @@
-type Props = {
-  carName: (car: string) => void
-}
+import { useContext } from "react"
+import Context from "../../formContext"
 
-const CreateCarNameForm = ({ carName }: Props) => {
+type Props = {}
+
+const CreateCarNameForm = (props: Props) => {
+  const context = useContext(Context)
+
   return (
     <div>
       <label htmlFor="car">Car Name</label>
@@ -11,7 +14,7 @@ const CreateCarNameForm = ({ carName }: Props) => {
         id="car"
         name="car"
         placeholder="Car Name"
-        onChange={(e: any) => carName(e.target.value)}
+        onChange={(e: any) => context?.carName(e.target.value)}
       />
     </div>
   )

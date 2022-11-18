@@ -2,18 +2,14 @@ import CreateCarColorImage from "./CreateCarColorImageForm/CreateCarColorImage"
 import CreateCarModelForm from "./CreateCarModelForm/CreateCarModelForm"
 import CreateCarNameForm from "./CreateCarNameForm/CreateCarNameForm"
 
-type Props = {
-  carName: (car: any) => void
-  carModel: (model: any) => void
-  carPhotoImage: (carPhotoImageFile: any) => void
-}
+type Props = {}
 
-const CarInfoForm = ({ carName, carModel, carPhotoImage }: Props) => {
+const CarInfoForm = (props: Props) => {
   return (
     <>
-      <CreateCarNameForm carName={carName} />
-      <CreateCarModelForm carModel={carModel} />
-      <CreateCarColorImage carPhotoImage={carPhotoImage} />
+      <CreateCarNameForm />
+      <CreateCarModelForm />
+      <CreateCarColorImage />
     </>
   )
 }

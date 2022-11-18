@@ -1,10 +1,10 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import Context from "../../formContext"
 
-type Props = {
-  carImageUpHolsteryInterior: (upholstery: any) => void
-}
+type Props = {}
 
-const ImageUpHolsteryInteriorForm = ({ carImageUpHolsteryInterior }: Props) => {
+const ImageUpHolsteryInteriorForm = (props: Props) => {
+  const context = useContext(Context)
   const [upHolsteryInterior, setUpHolsteryInterior] = useState<any>()
 
   const previewFile = (e: any) => {
@@ -12,7 +12,7 @@ const ImageUpHolsteryInteriorForm = ({ carImageUpHolsteryInterior }: Props) => {
 
     reader.addEventListener("load", () => {
       setUpHolsteryInterior(reader.result)
-      carImageUpHolsteryInterior(reader.result)
+      context?.carImageUpHolsteryInterior(reader.result)
     })
 
     if (e.target.files[0]) {

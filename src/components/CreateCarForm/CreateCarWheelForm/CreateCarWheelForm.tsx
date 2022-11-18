@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState, useContext } from "react"
+import Context from "../formContext"
 import CreateCarPhotosForm from "../CreateCarPhotosForm/CreateCarPhotosForm"
 
-type Props = {
-  carWheel: (wheel: any, photos: any) => void
-}
+type Props = {}
 
-const CreateCarWheelForm = ({ carWheel }: Props) => {
+const CreateCarWheelForm = (props: Props) => {
+  const context = useContext(Context)
   const [wheel, setWheel] = useState<any>()
   const [photos, setPhotos] = useState<any>()
 
@@ -19,8 +19,6 @@ const CreateCarWheelForm = ({ carWheel }: Props) => {
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0])
     }
-
-    // carWheel(e.target.files[0], photos)
   }
 
   const carPhotos = (photos: any) => {
@@ -28,12 +26,8 @@ const CreateCarWheelForm = ({ carWheel }: Props) => {
   }
 
   const handlerClick = () => {
-    carWheel(wheel, photos)
+    context?.carWheel(wheel, photos)
   }
-
-  // useEffect(() => {
-  //   carWheel(wheel, photos)
-  // }, [wheel, photos])
 
   return (
     <>

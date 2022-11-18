@@ -79,7 +79,6 @@ const OptionListItemForm = (props: Props) => {
         />
       </div>
       <button onClick={() => context?.optionsListArray(form)}>save</button>
-      <hr />
     </>
   )
 }

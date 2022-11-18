@@ -1,26 +1,23 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import Context from "../../formContext"
 
-type Props = {
-  carPhotoImage: (file: any) => void
-}
+type Props = {}
 
-const CreateCarColorImage = ({ carPhotoImage }: Props) => {
+const CreateCarColorImage = (props: Props) => {
+  const context = useContext(Context)
   const [carColorImage, setCarColorImage] = useState<any>()
 
   const previewFile = (e: any) => {
-    console.log(e.target.files[0])
     const reader = new FileReader()
 
     reader.addEventListener("load", () => {
       setCarColorImage(reader.result)
-      carPhotoImage(reader.result)
+      context?.carColorImage(reader.result)
     })
 
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0])
     }
-
-    // carPhotoImage(e.target.files[0])
   }
 
   return (
