@@ -2,11 +2,11 @@ import { useState, useContext } from "react"
 import Context from "../../formContext"
 
 type Props = {
-  carImageTrims: (trims: any) => void
+  carImageTrims?: (trims: any) => void
   setImageTrims: any
 }
 
-const ImageTrimsForm = ({ carImageTrims, setImageTrims }: Props) => {
+const ImageTrimsForm = ({ setImageTrims }: Props) => {
   const appContext = useContext(Context)
   const [image, setImage] = useState<any>()
 
@@ -22,7 +22,7 @@ const ImageTrimsForm = ({ carImageTrims, setImageTrims }: Props) => {
       reader.readAsDataURL(e.target.files[0])
     }
 
-    carImageTrims(e.target.files[0])
+    // carImageTrims(e.target.files[0])
   }
 
   return (

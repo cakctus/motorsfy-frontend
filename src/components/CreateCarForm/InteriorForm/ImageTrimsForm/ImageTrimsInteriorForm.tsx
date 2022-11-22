@@ -5,14 +5,17 @@ import ImageTrimsForm from "./ImageTrimsForm"
 type Props = {
   // carImageTrimsInterior: (imageTrimsInterior: any) => void
   setImageTrimsInterior: any
+  saveAndAdd: () => void
 }
 
 const ImageTrimsInteriorForm = ({
   // carImageTrimsInterior,
   setImageTrimsInterior,
+  saveAndAdd,
 }: Props) => {
   const appContext = useContext(Context)
   const [image, setImage] = useState<any>()
+  const [isAdd, setIsAdd] = useState<boolean>(false)
 
   const previewFile = (e: any) => {
     const reader = new FileReader()
@@ -29,6 +32,11 @@ const ImageTrimsInteriorForm = ({
     // carImageTrimsInterior(e.target.files[0])
   }
 
+  const save = () => {
+    saveAndAdd()
+    setIsAdd(true)
+  }
+
   return (
     <>
       <div>
@@ -39,8 +47,11 @@ const ImageTrimsInteriorForm = ({
           name="upholstery"
           onChange={(e) => previewFile(e)}
         />
-        <img src={image} alt="" />
+        <img src={image} alt="" width="400" />
       </div>
+      <button onClick={() => save()} disabled={isAdd ? true : false}>
+        save and add
+      </button>
     </>
   )
 }

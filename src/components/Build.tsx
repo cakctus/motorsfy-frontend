@@ -1,4 +1,4 @@
-import React, { useState, createRef } from "react"
+import { useState } from "react"
 
 import "../style.scss"
 import { cars } from "../data/cars"
@@ -118,6 +118,7 @@ const Build = (props: Props) => {
             />
           </div>
 
+          {/* car images */}
           <div className="imageColorContainer">
             {urls.map((item: any, index: any) => {
               return (
@@ -135,7 +136,6 @@ const Build = (props: Props) => {
           </div>
 
           {/* wheels */}
-
           <div className="imageWheelsContainer">
             {urls[carsListId]?.wheel?.map((item: any, index: any) => {
               return (
@@ -190,6 +190,7 @@ const Build = (props: Props) => {
             </div>
           )}
 
+          {/* interior upholstery */}
           <div className="interior-upHolstery">
             {urls[carsListId].interior.map((item: any, index: any) => {
               return (
@@ -207,6 +208,8 @@ const Build = (props: Props) => {
               )
             })}
           </div>
+
+          {/* interior trims */}
           <div className="interior-trims">
             {urls[carsListId].interior[upHolsteryId].trims !== undefined
               ? urls[carsListId].interior[upHolsteryId].trims.map(

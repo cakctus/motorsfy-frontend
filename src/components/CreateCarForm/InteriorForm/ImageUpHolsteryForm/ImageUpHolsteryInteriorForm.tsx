@@ -32,7 +32,7 @@ const ImageUpHolsteryInteriorForm = (props: Props) => {
           name="upholstery"
           onChange={(e) => previewFile(e)}
         />
-        <img src={upHolsteryInterior} alt="" />
+        <img src={upHolsteryInterior} alt="" width="400" />
       </div>
     </>
   )

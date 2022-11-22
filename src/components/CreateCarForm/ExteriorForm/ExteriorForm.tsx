@@ -1,5 +1,5 @@
 import { useState } from "react"
-import CreateCarWheelForm from "../CreateCarWheelForm/CreateCarWheelForm"
+import CreateCarWheelForm from "./CreateCarWheelForm/CreateCarWheelForm"
 
 type Props = {}
 
@@ -16,7 +16,7 @@ const ExteriorForm = (props: Props) => {
       {dynamicAddWheel.map((data: any, i: number) => {
         return (
           <>
-            <CreateCarWheelForm key={i} />
+            <CreateCarWheelForm />
             <button onClick={() => handleAddDynamic()}>add wheel</button>
           </>
         )

@@ -8,6 +8,7 @@ type Props = {
 const CreateCarPhotosForm = ({ carPhotos }: Props) => {
   const [uploadedImage, setUploadedImage] = useState<any[]>([])
   const [uploadedImage2, setUploadedImage2] = useState<any>([])
+  const [fileName, setFileName] = useState<any>([])
   const divRef = useRef<HTMLDivElement>(null!)
 
   let arr: any = []
@@ -43,6 +44,7 @@ const CreateCarPhotosForm = ({ carPhotos }: Props) => {
 
     for (let i: any = 0; i < files.length; i++) {
       arr.push(readFiles(files[i]))
+      setFileName((prev: any) => [...prev, files[i].name])
       output(
         " File " +
           i +
@@ -73,7 +75,7 @@ const CreateCarPhotosForm = ({ carPhotos }: Props) => {
   }
 
   function output(text: any): void {
-    divRef.current!.textContent += text
+    // divRef.current!.textContent += text
   }
 
   useEffect(() => {
@@ -92,11 +94,17 @@ const CreateCarPhotosForm = ({ carPhotos }: Props) => {
         onDragOver={onDragOver}
         onDrop={(e) => onDrop(e)}
       ></div>
-      <div id="imgContainer">
-        <ReactSortable list={uploadedImage2} setList={setUploadedImage2}>
+      <div>
+        <ReactSortable
+          id="imgContainer"
+          list={uploadedImage2}
+          setList={setUploadedImage2}
+        >
           {uploadedImage2.map((item: any, index: number) => (
             <div key={index}>
               <img className="img" src={item.img} alt="" width="250" />
+              <br />
+              <span>{fileName[index]}</span>
             </div>
           ))}
         </ReactSortable>

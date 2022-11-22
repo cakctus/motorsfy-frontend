@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react"
+import { createContext } from "react"
 
 export interface ContextState {
   carName: (car: string) => void
@@ -7,7 +7,7 @@ export interface ContextState {
   carWheel: (wheel: any, photosCar: any) => void
   carImageUpHolstery: (upholstery: any) => void
   carImageUpHolsteryInterior: (upholstery: any) => void
-
+  carImageTrims: (trimsImage: any, trimsInterior: any) => void
   setInterior: any
   interiorCar: any
   setTrimInterior: any
@@ -17,6 +17,9 @@ export interface ContextState {
   optionsListArray: any
   cars: any
   saveOptionObject: () => void
+  carsList: any
+  setLinkState: any
+  linkState: any
 }
 
 const Context = createContext<ContextState | null>(null)

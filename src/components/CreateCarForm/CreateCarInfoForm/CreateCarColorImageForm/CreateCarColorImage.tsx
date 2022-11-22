@@ -27,6 +27,8 @@ const CreateCarColorImage = (props: Props) => {
         <input type="file" onChange={(e) => previewFile(e)} />
         <img src={carColorImage} alt="" />
       </div>
+
+      <div>save model</div>
     </>
   )
 }

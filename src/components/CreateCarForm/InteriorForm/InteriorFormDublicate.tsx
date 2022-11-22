@@ -3,13 +3,11 @@ import Context from "../formContext"
 import ImageTrimsForm from "./ImageTrimsForm/ImageTrimsForm"
 import ImageTrimsInteriorForm from "./ImageTrimsForm/ImageTrimsInteriorForm"
 
-type Props = {
-  carImageTrims: any
-}
+type Props = {}
 
-const InteriorFormDublicate = ({ carImageTrims }: Props) => {
+const InteriorFormDublicate = (props: Props) => {
   const appContext = useContext(Context)
-  const [val, setVal] = useState<any>([])
+  const [val, setVal] = useState<any>([[]])
   const [imageTrims, setImageTrims] = useState<any>()
   const [imageTrimsInterior, setImageTrimsInterior] = useState<any>()
 
@@ -19,24 +17,28 @@ const InteriorFormDublicate = ({ carImageTrims }: Props) => {
   }
 
   useEffect(() => {
-    carImageTrims(imageTrims, imageTrimsInterior)
+    appContext?.carImageTrims(imageTrims, imageTrimsInterior)
   }, [imageTrims, imageTrimsInterior])
+
+  const saveAndAdd = () => {
+    handleVal()
+    appContext?.trimInteriorFunc()
+  }
 
   return (
     <>
-      <button onClick={() => handleVal()}>add trim</button>
       {val.map((item: any, index: any) => {
         return (
           <>
             <ImageTrimsForm
-              carImageTrims={carImageTrims}
+              // carImageTrims={appContext?.carImageTrims}
               setImageTrims={setImageTrims}
             />
             <ImageTrimsInteriorForm
               // carImageTrimsInterior={carImageTrimsInterior}
               setImageTrimsInterior={setImageTrimsInterior}
+              saveAndAdd={saveAndAdd}
             />
-            <button onClick={() => appContext?.trimInteriorFunc()}>done</button>
           </>
         )
       })}
