@@ -28,7 +28,9 @@ const CreateCarColorImage = (props: Props) => {
         <img src={carColorImage} alt="" />
       </div>
 
-      <div>save model</div>
+      <button onClick={() => context?.saveAndAddAnotherColor()}>
+        save and add another color
+      </button>
     </>
   )
 }

@@ -20,6 +20,7 @@ export interface ContextState {
   carsList: any
   setLinkState: any
   linkState: any
+  saveAndAddAnotherColor: () => void
 }
 
 const Context = createContext<ContextState | null>(null)

@@ -14,6 +14,7 @@ const Form = (props: Props) => {
     options: [],
   })
   const [carsList, setCarsList] = useState<any>([cars])
+  const [car, setCar] = useState<any>({})
   // exterior
   const [wheel, setWheel] = useState<any>([])
   // interior
@@ -131,6 +132,19 @@ const Form = (props: Props) => {
     setCarsList([cars])
   }, [cars])
 
+  const saveAndAddAnotherColor = () => {
+    const obj = { ...cars }
+    setCar(obj)
+    setCarsList((prevState: any) => [...prevState, car])
+    // setCars({
+    //   id: 1,
+    //   color: "",
+    //   wheel: [],
+    //   interior: [],
+    //   options: [],
+    // })
+  }
+
   const AppContext: ContextState = {
     carName,
     carModel,
@@ -151,7 +165,10 @@ const Form = (props: Props) => {
     carImageTrims,
     setLinkState,
     linkState,
+    saveAndAddAnotherColor,
   }
+
+  console.log(carsList)
 
   return (
     <>
