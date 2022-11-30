@@ -1,9 +1,7 @@
 import CategoryForm from "./CategoryForm/CategoryForm"
 import OptionListForm from "./OptionListForm/OptionListForm"
 
-type Props = {}
-
-const OptionsForm = (props: Props) => {
+const OptionsForm = () => {
   return (
     <>
       <CategoryForm />

@@ -1,27 +1,23 @@
 import { useState, useEffect } from "react"
-import Context, { ContextState } from "./formContext"
+import Context from "./formContext"
 import MainForm from "./MainForm"
 
-type Props = {}
-
-const Form = (props: Props) => {
+const Form = () => {
   // car
-  const [cars, setCars] = useState<any>({
-    id: 1,
+  const [cars, setCars] = useState({
     color: "",
     wheel: [],
     interior: [],
     options: [],
   })
-  const [carsList, setCarsList] = useState<any>([cars])
-  const [car, setCar] = useState<any>({})
+  const [carsList, setCarsList] = useState([cars])
   // exterior
-  const [wheel, setWheel] = useState<any>([])
+  const [wheel, setWheel] = useState([])
   // interior
-  const [upHolsteryPhotos, setUpHolsteryPhotos] = useState<any>({})
-  const [imageTrimsObject, setImageTrimsObject] = useState<any>([])
-  const [interior, setInterior] = useState<any>([])
-  const [trimInterior, setTrimInterior] = useState<any>([
+  const [upHolsteryPhotos, setUpHolsteryPhotos] = useState({})
+  const [imageTrimsObject, setImageTrimsObject] = useState([])
+  const [interior, setInterior] = useState([])
+  const [trimInterior, setTrimInterior] = useState([
     {
       imageUpholstery: "",
       imageUpholsteryInterior: "",
@@ -34,56 +30,56 @@ const Form = (props: Props) => {
     },
   ])
   // option
-  const [categoryOptions, setCategoryOptions] = useState<any>()
-  const [optionList, setOptionList] = useState<any>([])
-  const [optionsObject, setObjectsObject] = useState<any>([])
+  const [categoryOptions, setCategoryOptions] = useState()
+  const [optionList, setOptionList] = useState([])
+  const [optionsObject, setObjectsObject] = useState([])
 
-  const [linkState, setLinkState] = useState<string>("Info")
+  const [linkState, setLinkState] = useState("Info")
 
-  const carName = (car: string) => {
-    setCars((prev: any) => ({
+  const carName = (car) => {
+    setCars((prev) => ({
       ...prev,
       car: car,
     }))
   }
 
-  const carModel = (model: string) => {
-    setCars((prev: any) => ({
+  const carModel = (model) => {
+    setCars((prev) => ({
       ...prev,
       model: model,
     }))
   }
 
-  const carColorImage = (carPhotoImageFile: string) => {
-    setCars((prev: any) => ({
+  const carColorImage = (carPhotoImageFile) => {
+    setCars((prev) => ({
       ...prev,
       color: carPhotoImageFile,
     }))
   }
 
-  const carWheel = (wheel: any, photosCar: any) => {
+  const carWheel = (wheel, photosCar) => {
     const obj = {
       imageWheel: wheel,
       photos: photosCar,
     }
-    setWheel((prev: any) => [...prev, obj])
+    setWheel((prev) => [...prev, obj])
   }
 
-  const carImageUpHolstery = (upholstery: any) => {
-    setUpHolsteryPhotos((prev: any) => ({
+  const carImageUpHolstery = (upholstery) => {
+    setUpHolsteryPhotos((prev) => ({
       ...prev,
       imageUpHolstery: upholstery,
     }))
   }
 
-  const carImageUpHolsteryInterior = (upholstery: any) => {
-    setUpHolsteryPhotos((prev: any) => ({
+  const carImageUpHolsteryInterior = (upholstery) => {
+    setUpHolsteryPhotos((prev) => ({
       ...prev,
       imageUpHolsteryInterior: upholstery,
     }))
   }
 
-  const carImageTrims = (trimsImage: any, trimsInterior: any) => {
+  const carImageTrims = (trimsImage, trimsInterior) => {
     const obj = {
       imageTrims: trimsImage,
       imageTrimsInterior: trimsInterior,
@@ -93,7 +89,7 @@ const Form = (props: Props) => {
 
   const trimInteriorFunc = () => {
     const obj = { ...imageTrimsObject }
-    setInterior((prev: any) => [...prev, obj])
+    setInterior((prev) => [...prev, obj])
   }
 
   const interiorCar = () => {
@@ -102,13 +98,13 @@ const Form = (props: Props) => {
       imageUpHolsteryInterior: upHolsteryPhotos.imageUpHolsteryInterior,
       trims: [...interior],
     }
-    setTrimInterior((prev: any) => [...prev, obj])
+    setTrimInterior((prev) => [...prev, obj])
     setInterior([])
   }
 
-  const optionsListArray = (obj: any) => {
+  const optionsListArray = (obj) => {
     const o = { ...obj }
-    setOptionList((prev: any) => [...prev, o])
+    setOptionList((prev) => [...prev, o])
   }
 
   const saveOptionObject = () => {
@@ -116,11 +112,11 @@ const Form = (props: Props) => {
       category: categoryOptions,
       optionList: optionList,
     }
-    setObjectsObject((prev: any) => [...prev, option])
+    setObjectsObject((prev) => [...prev, option])
   }
 
   useEffect(() => {
-    setCars((prev: any) => ({
+    setCars((prev) => ({
       ...prev,
       wheel: wheel ? wheel : [],
       interior: trimInterior,
@@ -128,24 +124,43 @@ const Form = (props: Props) => {
     }))
   }, [wheel, trimInterior, categoryOptions, optionList, optionsObject])
 
-  useEffect(() => {
-    setCarsList([cars])
-  }, [cars])
+  // useEffect(() => {
+  //   setCarsList([cars])
+  // }, [cars])
 
-  const saveAndAddAnotherColor = () => {
-    const obj = { ...cars }
-    setCar(obj)
-    setCarsList((prevState: any) => [...prevState, car])
-    // setCars({
-    //   id: 1,
-    //   color: "",
-    //   wheel: [],
-    //   interior: [],
-    //   options: [],
-    // })
+  const saveForm = (e) => {
+    console.log(e)
+    e.preventDefault()
   }
 
-  const AppContext: ContextState = {
+  const saveAndAddAnotherColor = () => {
+    setCarsList((prevState) =>
+      [...prevState, cars].filter((item) => item.color !== "")
+    )
+    setCars({})
+    setWheel([])
+    setTrimInterior([
+      {
+        imageUpholstery: "",
+        imageUpholsteryInterior: "",
+        trims: [
+          {
+            imageTrims: "",
+            imageTrimsInterior: "",
+          },
+        ],
+      },
+    ])
+
+    saveForm()
+  }
+
+  const resetForm = (e) => {
+    e.target.reset()
+    saveAndAddAnotherColor()
+  }
+
+  const AppContext = {
     carName,
     carModel,
     carColorImage,
@@ -166,9 +181,15 @@ const Form = (props: Props) => {
     setLinkState,
     linkState,
     saveAndAddAnotherColor,
+    saveForm,
+    resetForm,
   }
 
+  // console.log(cars)
   console.log(carsList)
+  // console.log(categoryOptions)
+  // console.log(optionList)
+  // console.log(optionsObject)
 
   return (
     <>

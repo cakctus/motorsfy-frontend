@@ -17,7 +17,7 @@ const OptionListForm = (props: Props) => {
       {val.map((item: any, index: number) => {
         return (
           <>
-            <OptionListItemForm />
+            <OptionListItemForm key={index} />
             <div>
               <br />
               <button onClick={() => handleVal()}>add</button>

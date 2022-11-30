@@ -13,7 +13,7 @@ const CategoryForm = (props: Props) => {
         <div>
           <label htmlFor="model">Model:</label>
           <select name="model" id="model">
-            <option value={context?.cars.model}>{context?.cars.model}</option>
+            <option value={context?.cars?.model}>{context?.cars?.model}</option>
           </select>
         </div>
 

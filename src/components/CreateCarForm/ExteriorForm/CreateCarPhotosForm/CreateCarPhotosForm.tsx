@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 import { ReactSortable } from "react-sortablejs"
+import store from "../../../../store/store"
 
 type Props = {
   carPhotos: (photos: any) => void
@@ -37,10 +38,12 @@ const CreateCarPhotosForm = ({ carPhotos }: Props) => {
   }
 
   const onDrop = (e: any) => {
+    console.log([...e.target.files])
     e.stopPropagation()
     e.preventDefault()
     let dt = e.dataTransfer
-    let files = dt.files
+    // let files = dt.files
+    let files = [...e.target.files]
 
     for (let i: any = 0; i < files.length; i++) {
       arr.push(readFiles(files[i]))
@@ -93,7 +96,19 @@ const CreateCarPhotosForm = ({ carPhotos }: Props) => {
         onDragEnter={onDragEnter}
         onDragOver={onDragOver}
         onDrop={(e) => onDrop(e)}
-      ></div>
+        style={{ width: "500px" }}
+      >
+        <div>
+          <label htmlFor="file">Choose File</label>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            multiple
+            onChange={(e) => onDrop(e)}
+          />
+        </div>
+      </div>
       <div>
         <ReactSortable
           id="imgContainer"

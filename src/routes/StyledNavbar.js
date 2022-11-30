@@ -14,8 +14,6 @@ const StyledNavbar = () => {
     }
   }, [auth])
 
-  console.log(auth)
-
   return (
     <>
       <header className="header">
