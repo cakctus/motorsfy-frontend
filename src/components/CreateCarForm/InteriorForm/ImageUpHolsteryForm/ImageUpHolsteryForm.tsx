@@ -1,11 +1,13 @@
 import { useState, useContext } from "react"
 import Context from "../../formContext"
+import { useClearState } from "../../../../hooks/useClearState"
 
 type Props = {}
 
 const ImageUpHolsteryForm = (props: Props) => {
   const context = useContext(Context)
   const [upHolstery, setUpholstery] = useState<any>()
+  const [handleValue] = useClearState(context?.clearState, setUpholstery)
 
   const previewFile = (e: any) => {
     const reader = new FileReader()

@@ -1,5 +1,7 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useContext } from "react"
+import Context from "../../formContext"
 import { ReactSortable } from "react-sortablejs"
+import { useClearState } from "../../../../hooks/useClearState"
 import store from "../../../../store/store"
 
 type Props = {
@@ -7,10 +9,12 @@ type Props = {
 }
 
 const CreateCarPhotosForm = ({ carPhotos }: Props) => {
+  const context = useContext(Context)
   const [uploadedImage, setUploadedImage] = useState<any[]>([])
   const [uploadedImage2, setUploadedImage2] = useState<any>([])
   const [fileName, setFileName] = useState<any>([])
   const divRef = useRef<HTMLDivElement>(null!)
+  // const [handleValue] = useClearState(context?.clearState, setUploadedImage2)
 
   let arr: any = []
 
@@ -86,6 +90,14 @@ const CreateCarPhotosForm = ({ carPhotos }: Props) => {
       carPhotos(uploadedImage2)
     }
   }, [uploadedImage2])
+
+  useEffect(() => {
+    setUploadedImage2(() => {
+      if (context?.clearState) {
+        return [{}]
+      } else return uploadedImage2
+    })
+  }, [context?.clearState])
 
   return (
     <>

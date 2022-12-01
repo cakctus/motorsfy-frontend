@@ -1,11 +1,13 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import Context from "../../formContext"
+import { useClearState } from "../../../../hooks/useClearState"
 
 type Props = {}
 
 const CreateCarColorImage = (props: Props) => {
   const context = useContext(Context)
   const [carColorImage, setCarColorImage] = useState<any>()
+  const [handleValue] = useClearState(context?.clearState, setCarColorImage)
 
   const previewFile = (e: any) => {
     const reader = new FileReader()
@@ -20,6 +22,20 @@ const CreateCarColorImage = (props: Props) => {
     }
   }
 
+  // useEffect(() => {
+  //   setCarColorImage(() => {
+  //     if (context?.clearState) {
+  //       return ""
+  //     }
+  //   })
+  // }, [context?.clearState])
+
+  useEffect(() => {
+    handleValue()
+  }, [context?.clearState])
+
+  console.log(context?.clearState, "clearState")
+
   return (
     <>
       <div>
@@ -29,7 +45,7 @@ const CreateCarColorImage = (props: Props) => {
       </div>
 
       <button onClick={() => context?.saveAndAddAnotherColor()}>
-        save and add another color
+        save car
       </button>
     </>
   )

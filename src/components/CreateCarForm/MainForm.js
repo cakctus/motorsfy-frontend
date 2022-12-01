@@ -11,7 +11,6 @@ import "./form.scss"
 
 const MainForm = () => {
   const context = useContext(Context)
-  const inputEl = useRef(null)
 
   return (
     <>
@@ -33,7 +32,7 @@ const MainForm = () => {
           }
         )}
       </div>
-      <form onSubmit={(e) => context?.saveForm(e)} onReset={context?.resetForm}>
+      <form onSubmit={(e) => e.preventDefault()} onReset={context?.resetForm}>
         <div
           className="carinfo-form"
           style={{ display: context?.linkState === "Info" ? "block" : "none" }}
@@ -77,7 +76,7 @@ const MainForm = () => {
           " no data"
         )} */}
         </div>
-        <input type="reset" />
+        <input type="reset" value="add another car" />
       </form>
       <div id="detail">
         <Outlet />

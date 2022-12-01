@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit"
 import authSlice from "../features/auth/authSlice"
+import optionsFormSlice from "../features/optionsForm/optionsFormSlice"
 
 const store = configureStore({
   reducer: {
     auth: authSlice,
+    optionsForm: optionsFormSlice,
   },
 })
 

@@ -25,6 +25,14 @@ const InteriorFormDublicate = (props: Props) => {
     appContext?.trimInteriorFunc()
   }
 
+  useEffect(() => {
+    setVal(() => {
+      if (!appContext?.clearState) {
+        return [[]]
+      }
+    })
+  }, [!appContext?.clearState])
+
   return (
     <>
       {val.map((item: any, index: any) => {

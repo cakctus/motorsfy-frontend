@@ -1,9 +1,11 @@
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
 import CreateCarWheelForm from "./CreateCarWheelForm/CreateCarWheelForm"
+import Context from "../formContext"
 
 type Props = {}
 
 const ExteriorForm = (props: Props) => {
+  const context = useContext(Context)
   const [dynamicAddWheel, setDynamicAddWheel] = useState<any>([[]])
 
   const handleAddDynamic = () => {
@@ -11,9 +13,17 @@ const ExteriorForm = (props: Props) => {
     setDynamicAddWheel(res)
   }
 
+  useEffect(() => {
+    setDynamicAddWheel(() => {
+      if (!context?.clearState) {
+        return [[]]
+      }
+    })
+  }, [!context?.clearState])
+
   return (
-    <div>
-      {dynamicAddWheel.map((data: any, i: number) => {
+    <>
+      {dynamicAddWheel?.map((data: any, i: number) => {
         return (
           <>
             <CreateCarWheelForm />
@@ -21,7 +31,7 @@ const ExteriorForm = (props: Props) => {
           </>
         )
       })}
-    </div>
+    </>
   )
 }
 

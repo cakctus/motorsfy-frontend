@@ -1,6 +1,7 @@
 import { useState, useContext } from "react"
 import Context from "../../formContext"
 import CreateCarPhotosForm from "../CreateCarPhotosForm/CreateCarPhotosForm"
+import { useClearState } from "../../../../hooks/useClearState"
 
 type Props = {}
 
@@ -8,6 +9,7 @@ const CreateCarWheelForm = (props: Props) => {
   const context = useContext(Context)
   const [wheel, setWheel] = useState<any>()
   const [photos, setPhotos] = useState<any>()
+  const [handleValue] = useClearState(context?.clearState, setWheel)
 
   const previewFile = (e: any) => {
     const reader = new FileReader()

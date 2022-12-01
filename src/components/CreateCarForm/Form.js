@@ -36,6 +36,8 @@ const Form = () => {
 
   const [linkState, setLinkState] = useState("Info")
 
+  const [clearState, setClearState] = useState(false)
+
   const carName = (car) => {
     setCars((prev) => ({
       ...prev,
@@ -124,18 +126,26 @@ const Form = () => {
     }))
   }, [wheel, trimInterior, categoryOptions, optionList, optionsObject])
 
+  useEffect(() => {
+    setClearState(() => {
+      if (clearState) {
+        return false
+      }
+      return false
+    })
+  }, [clearState])
+
   // useEffect(() => {
   //   setCarsList([cars])
   // }, [cars])
 
   const saveForm = (e) => {
-    console.log(e)
     e.preventDefault()
   }
 
   const saveAndAddAnotherColor = () => {
-    setCarsList((prevState) =>
-      [...prevState, cars].filter((item) => item.color !== "")
+    setCarsList(
+      (prevState) => [...prevState, cars].filter((item) => item.color !== "") // todo => item.id === 1
     )
     setCars({})
     setWheel([])
@@ -152,12 +162,14 @@ const Form = () => {
       },
     ])
 
-    saveForm()
+    // setClearState(true)
+    // saveForm()
   }
 
   const resetForm = (e) => {
     e.target.reset()
-    saveAndAddAnotherColor()
+    // saveAndAddAnotherColor()
+    setClearState(true)
   }
 
   const AppContext = {
@@ -183,13 +195,15 @@ const Form = () => {
     saveAndAddAnotherColor,
     saveForm,
     resetForm,
+    clearState,
+    setClearState,
   }
 
   // console.log(cars)
   console.log(carsList)
   // console.log(categoryOptions)
   // console.log(optionList)
-  // console.log(optionsObject)
+  console.log(optionsObject)
 
   return (
     <>

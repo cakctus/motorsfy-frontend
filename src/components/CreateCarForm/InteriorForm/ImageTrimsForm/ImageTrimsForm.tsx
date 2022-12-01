@@ -1,5 +1,6 @@
 import { useState, useContext } from "react"
 import Context from "../../formContext"
+import { useClearState } from "../../../../hooks/useClearState"
 
 type Props = {
   carImageTrims?: (trims: any) => void
@@ -9,6 +10,7 @@ type Props = {
 const ImageTrimsForm = ({ setImageTrims }: Props) => {
   const appContext = useContext(Context)
   const [image, setImage] = useState<any>()
+  const [handleValue] = useClearState(appContext?.clearState, setImage)
 
   const previewFile = (e: any) => {
     const reader = new FileReader()
