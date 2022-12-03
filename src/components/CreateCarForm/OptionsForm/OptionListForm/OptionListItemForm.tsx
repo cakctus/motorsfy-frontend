@@ -1,10 +1,13 @@
 import { useState, useContext } from "react"
 import Context from "../../formContext"
+import { useDispatch, useSelector } from "react-redux"
+import { setOptionsArray } from "../../../../features/optionsForm/optionsObjectListSlice"
 
 type Props = {}
 
 const OptionListItemForm = (props: Props) => {
   const context = useContext(Context)
+  const dispatch = useDispatch()
   const [form, setForm] = useState<any>({
     title: "",
     image: "",
@@ -78,7 +81,7 @@ const OptionListItemForm = (props: Props) => {
           onChange={(e: any) => handleForm(e)}
         />
       </div>
-      <button onClick={() => context?.optionsListArray(form)}>save</button>
+      <button onClick={() => dispatch(setOptionsArray(form))}>save</button>
     </>
   )
 }

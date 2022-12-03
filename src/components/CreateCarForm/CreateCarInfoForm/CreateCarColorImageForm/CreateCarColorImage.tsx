@@ -12,13 +12,19 @@ const CreateCarColorImage = (props: Props) => {
   const previewFile = (e: any) => {
     const reader = new FileReader()
 
+    const f = new FormData()
+    f.append("image", e.target.files[0])
+    context?.carColorImage(e.target.files[0])
+
     reader.addEventListener("load", () => {
       setCarColorImage(reader.result)
-      context?.carColorImage(reader.result)
+      // const f = new FormData()
+      // f.append("image", e.target.files[0])
+      // context?.carColorImage(f)
     })
 
     if (e.target.files[0]) {
-      reader.readAsDataURL(e.target.files[0])
+      reader.readAsArrayBuffer(e.target.files[0])
     }
   }
 
@@ -33,8 +39,6 @@ const CreateCarColorImage = (props: Props) => {
   useEffect(() => {
     handleValue()
   }, [context?.clearState])
-
-  console.log(context?.clearState, "clearState")
 
   return (
     <>

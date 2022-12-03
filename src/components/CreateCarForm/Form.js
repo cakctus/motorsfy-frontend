@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import Context from "./formContext"
 import MainForm from "./MainForm"
+import { useSelector } from "react-redux"
 
 const Form = () => {
   // car
@@ -30,6 +31,7 @@ const Form = () => {
     },
   ])
   // option
+  const optionsObject1 = useSelector((state) => state.saveOptions)
   const [categoryOptions, setCategoryOptions] = useState()
   const [optionList, setOptionList] = useState([])
   const [optionsObject, setObjectsObject] = useState([])
@@ -122,9 +124,18 @@ const Form = () => {
       ...prev,
       wheel: wheel ? wheel : [],
       interior: trimInterior,
-      options: optionsObject ? optionsObject : [],
+      // options: optionsObject1 ? optionsObject1 : [],
     }))
-  }, [wheel, trimInterior, categoryOptions, optionList, optionsObject])
+  }, [wheel, trimInterior, categoryOptions, optionList, optionsObject1])
+
+  useEffect(() => {
+    setCarsList(
+      carsList.map((car) => ({
+        ...car,
+        ["options"]: optionsObject1 ? optionsObject1 : [],
+      }))
+    )
+  }, [wheel, trimInterior, optionsObject1])
 
   useEffect(() => {
     setClearState(() => {
@@ -203,7 +214,7 @@ const Form = () => {
   console.log(carsList)
   // console.log(categoryOptions)
   // console.log(optionList)
-  console.log(optionsObject)
+  // console.log(optionsObject)
 
   return (
     <>

@@ -20,7 +20,7 @@ const Registration = () => {
       <main>
         <form method="post">
           <h1>Sign up</h1>
-          <section>
+          {/* <section>
             <label htmlFor="name">Full name</label>
             <input
               id="name"
@@ -29,7 +29,7 @@ const Registration = () => {
               required=""
               pattern="[\p{L}\.\- ]+"
             />
-          </section>
+          </section> */}
           <section>
             <label htmlFor="email">Email</label>
             <input

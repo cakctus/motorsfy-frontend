@@ -13,9 +13,9 @@ const CreateCarWheelForm = (props: Props) => {
 
   const previewFile = (e: any) => {
     const reader = new FileReader()
-
+    setWheel(e.target.files[0])
     reader.addEventListener("load", () => {
-      setWheel(reader.result)
+      // setWheel(e.target.files[0])
     })
 
     if (e.target.files[0]) {

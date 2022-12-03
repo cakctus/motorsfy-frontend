@@ -42,7 +42,7 @@ const CreateCarPhotosForm = ({ carPhotos }: Props) => {
   }
 
   const onDrop = (e: any) => {
-    console.log([...e.target.files])
+    // console.log([...e.target.files])
     e.stopPropagation()
     e.preventDefault()
     let dt = e.dataTransfer
@@ -50,7 +50,11 @@ const CreateCarPhotosForm = ({ carPhotos }: Props) => {
     let files = [...e.target.files]
 
     for (let i: any = 0; i < files.length; i++) {
-      arr.push(readFiles(files[i]))
+      // arr.push(readFiles(files[i]))
+      const obj: any = {}
+      obj["img"] = files[i]
+      arr.push(files[i])
+      setUploadedImage2(arr)
       setFileName((prev: any) => [...prev, files[i].name])
       output(
         " File " +
@@ -66,19 +70,19 @@ const CreateCarPhotosForm = ({ carPhotos }: Props) => {
           "\n"
       )
     }
-    Promise.all(arr).then((result) => {
-      const arr: any = []
-      // result.map((item, index) => {
-      //   return (obj[index] = item)
-      // })
-      for (let i = 0; i < result.length; i++) {
-        const obj: any = {}
-        obj["img"] = result[i]
-        arr.push(obj)
-      }
-      setUploadedImage2(arr)
-      setUploadedImage(Object.assign({}, result))
-    })
+    // Promise.all(arr).then((result) => {
+    //   const arr: any = []
+    //   // result.map((item, index) => {
+    //   //   return (obj[index] = item)
+    //   // })
+    //   for (let i = 0; i < result.length; i++) {
+    //     const obj: any = {}
+    //     obj["img"] = result[i]
+    //     arr.push(obj)
+    //   }
+    //   setUploadedImage2(arr)
+    //   setUploadedImage(Object.assign({}, result))
+    // })
   }
 
   function output(text: any): void {

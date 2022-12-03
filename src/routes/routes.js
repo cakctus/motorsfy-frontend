@@ -7,6 +7,7 @@ import Form2 from "../components/Form2"
 import Registration from "../components/Auth/Registration/Registration"
 import Login from "../components/Auth/Login/Login"
 import Logout from "../components/Auth/Logout/Logout"
+import CarsByUser from "../components/CarsByUser/CarsByUser"
 import StyledNavbar from "./StyledNavbar"
 
 const BaseRouter = () => {
@@ -22,6 +23,7 @@ const BaseRouter = () => {
           <Route path="/registration" element={<Registration />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/mycars" element={<CarsByUser />} />
         </Route>
       </Routes>
     </>

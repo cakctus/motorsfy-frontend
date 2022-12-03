@@ -6,11 +6,16 @@ import InteriorForm from "./InteriorForm/InteriorForm"
 import OptionsForm from "./OptionsForm/OptionsForm"
 import Preview from "./Preview"
 import { Outlet } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { createCar } from "../../features/createCarForm/createCarFormSlice"
 
 import "./form.scss"
 
 const MainForm = () => {
   const context = useContext(Context)
+  const dispatch = useDispatch()
+
+  // console.log(JSON.parse(localStorage.getItem("user")).userId)
 
   return (
     <>
@@ -33,6 +38,20 @@ const MainForm = () => {
         )}
       </div>
       <form onSubmit={(e) => e.preventDefault()} onReset={context?.resetForm}>
+        <div>
+          <button
+            onClick={() =>
+              dispatch(
+                createCar({
+                  json: context?.carsList,
+                  id: JSON.parse(localStorage.getItem("user")).userId,
+                })
+              )
+            }
+          >
+            create
+          </button>
+        </div>
         <div
           className="carinfo-form"
           style={{ display: context?.linkState === "Info" ? "block" : "none" }}

@@ -40,7 +40,7 @@ export const loginSlice = createAsyncThunk(
       //   email: data.user.email,
       //   isActivated: data.user.isActivated,
       // }
-      localStorage.setItem("token", data.accessToken)
+      localStorage.setItem("token", JSON.stringify(data.accessToken))
       // localStorage.setItem("user", user)
       dispatch(setUser(data))
       return data
@@ -79,7 +79,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, action) {
-      localStorage.setItem("user", action.payload)
+      localStorage.setItem("user", JSON.stringify(action.payload))
     },
     logoutUser(state, action) {},
   },

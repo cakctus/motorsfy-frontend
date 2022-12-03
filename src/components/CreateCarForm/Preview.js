@@ -241,6 +241,81 @@ const Build = () => {
               : ""}
           </div>
         </div>
+
+        <div
+          className="options-container"
+          style={{
+            display: togleType === "Options" ? "block" : "none",
+          }}
+        >
+          <div className="options-category-list">
+            <div
+              className="options-category"
+              onClick={(e) => handleOptionsId(0, e.target.textContent)}
+            >
+              All
+            </div>
+            {context?.carsList[carsListId]?.options?.map((item, index) => {
+              return (
+                <div
+                  className="options-category"
+                  key={index}
+                  onClick={(e) => handleOptionsId(index, e.target.textContent)}
+                >
+                  {item.category}
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="options-items">
+            {optionsTypeToggle.category === "All"
+              ? context?.carsList[carsListId]?.options.map((item) => {
+                  return item.optionList.map((item, index) => {
+                    return (
+                      <div className="options-item" key={index}>
+                        <img src={item.image} className="options-img" alt="" />
+                        <p className="options-title">{item.title}</p>
+                        <p className="options-price">{item.price}</p>
+                        <p className="options-description">
+                          {item.description}
+                        </p>
+                      </div>
+                    )
+                  })
+                })
+              : context?.carsList[carsListId]?.options
+                  .filter(
+                    (item) => item.category === optionsTypeToggle.category
+                  )[0]
+                  .optionList.map((item, index) => {
+                    return (
+                      <div className="options-item" key={index}>
+                        <img src={item.image} className="options-img" alt="" />
+                        <p className="options-title">{item.title}</p>
+                        <p className="options-price">{item.price}</p>
+                        <p className="options-description">
+                          {item.description}
+                        </p>
+                      </div>
+                    )
+                  })}
+            {/* {urls[carsListId].options
+              .filter(
+                (item: any) => item.category === optionsTypeToggle.category
+              )[0]
+              .optionList.map((item: any, index: any) => {
+                return (
+                  <div className="options-item" key={index}>
+                    <img src={item.image} className="options-img" alt="" />
+                    <p className="options-title">{item.title}</p>
+                    <p className="options-price">{item.price}</p>
+                    <p className="options-description">{item.description}</p>
+                  </div>
+                )
+              })} */}
+          </div>
+        </div>
       </div>
     </>
   )
