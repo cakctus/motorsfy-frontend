@@ -1,13 +1,11 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import Context from "../formContext"
+import "../../../style.scss"
 
-import "../style.scss"
-import { cars } from "../data/cars"
-
-type Props = {}
-
-const Build = (props: Props) => {
-  const [urls, setUrls] = useState(cars)
-  const [urlsId, setUrlsId] = useState(4)
+const Build = () => {
+  const context = useContext(Context)
+  const [urls, setUrls] = useState()
+  const [urlsId, setUrlsId] = useState(0)
   const [carsListId, setCarsListId] = useState(0)
   const [carsWheelsId, setCarsWheelsId] = useState(0)
 
@@ -22,7 +20,7 @@ const Build = (props: Props) => {
     category: "All",
   })
 
-  const clickHandler = (e: any) => {
+  const clickHandler = (e) => {
     if (e.deltaY > 0) {
       setUrlsId(urlsId - 1)
     }
@@ -32,7 +30,10 @@ const Build = (props: Props) => {
     }
 
     setUrlsId((prev) => {
-      if (prev >= urls[carsListId].wheel[carsWheelsId].photos.length) {
+      if (
+        prev >=
+        context?.carsList[carsListId]?.wheel[carsWheelsId]?.photos?.length
+      ) {
         return 1
       }
       return prev + 1
@@ -40,24 +41,26 @@ const Build = (props: Props) => {
 
     setUrlsId((prev) => {
       if (prev <= 0) {
-        return urls[carsListId].wheel[carsWheelsId].photos.length - 1
+        return (
+          context?.carsList[carsListId]?.wheel[carsWheelsId]?.photos.length - 1
+        )
       }
       return prev - 1
     })
   }
 
-  const handleCarId = (index: any) => {
+  const handleCarId = (index) => {
     setCarsListId(index)
     setCarsWheelsId(0)
   }
 
-  const handleUpHostery = (index: any) => {
+  const handleUpHostery = (index) => {
     setToggleInteriorPhoto(true)
     setUpHolsteryId(index)
     // setTrimsId(0)
   }
 
-  const handleTrimId = (index: any) => {
+  const handleTrimId = (index) => {
     setToggleInteriorPhoto(false)
     // setUpHolsteryId(0)
     setTrimsId(index)
@@ -74,7 +77,7 @@ const Build = (props: Props) => {
     display: togleType === "Exterior" ? "block" : "none",
   }
 
-  const handleOptionsId = (id: any, category: any) => {
+  const handleOptionsId = (id, category) => {
     setOptionsTypeToggle({
       index: id,
       category: category,
@@ -86,7 +89,7 @@ const Build = (props: Props) => {
       <div className="container">
         <div
           className="categories-list"
-          onClick={(e: any) => setTogleType(e.target.textContent)}
+          onClick={(e) => setTogleType(e.target.textContent)}
         >
           <div className="categories-exterior">
             <p>Exterior</p>
@@ -113,7 +116,11 @@ const Build = (props: Props) => {
           >
             <img
               className="imageId"
-              src={urls[carsListId].wheel[carsWheelsId].photos[urlsId]}
+              src={
+                context?.carsList[carsListId]?.wheel[carsWheelsId]?.photos[
+                  urlsId
+                ]?.img
+              }
               alt=""
               style={divStyle}
             />
@@ -121,7 +128,7 @@ const Build = (props: Props) => {
 
           {/* car images */}
           <div className="imageColorContainer">
-            {urls.map((item: any, index: any) => {
+            {context?.carsList.map((item, index) => {
               return (
                 <>
                   <div
@@ -138,7 +145,7 @@ const Build = (props: Props) => {
 
           {/* wheels */}
           <div className="imageWheelsContainer">
-            {urls[carsListId]?.wheel?.map((item: any, index: any) => {
+            {context?.carsList[carsListId]?.wheel?.map((item, index) => {
               return (
                 <div
                   className="imageWheelItem"
@@ -168,8 +175,8 @@ const Build = (props: Props) => {
               <img
                 className="imageId"
                 src={
-                  urls[carsListId].interior[upHolsteryId]
-                    .imageUpholsteryInterior
+                  context?.carsList[carsListId]?.interior[upHolsteryId]
+                    ?.imageUpHolsteryInterior
                 }
                 alt=""
                 style={divStyle}
@@ -180,9 +187,10 @@ const Build = (props: Props) => {
               <img
                 className="imageId"
                 src={
-                  urls[carsListId].interior[upHolsteryId].trims !== undefined
-                    ? urls[carsListId].interior[upHolsteryId].trims[trimsId]
-                        .imageTrimsInterior
+                  context?.carsList[carsListId]?.interior[upHolsteryId]
+                    ?.trims !== undefined
+                    ? context?.carsList[carsListId]?.interior[upHolsteryId]
+                        ?.trims[trimsId]?.imageTrimsInterior
                     : ""
                 }
                 alt=""
@@ -193,7 +201,7 @@ const Build = (props: Props) => {
 
           {/* interior upholstery */}
           <div className="interior-upHolstery">
-            {urls[carsListId].interior.map((item: any, index: any) => {
+            {context?.carsList[carsListId]?.interior.map((item, index) => {
               return (
                 <div
                   className="interiorUpholsteryImages"
@@ -202,7 +210,7 @@ const Build = (props: Props) => {
                 >
                   <img
                     className="interiorUpholsteryImg"
-                    src={item.imageUpholstery}
+                    src={item.imageUpHolstery}
                     alt=""
                   />
                 </div>
@@ -212,23 +220,24 @@ const Build = (props: Props) => {
 
           {/* interior trims */}
           <div className="interior-trims">
-            {urls[carsListId].interior[upHolsteryId].trims !== undefined
-              ? urls[carsListId].interior[upHolsteryId].trims.map(
-                  (item: any, index: any) => {
-                    return (
-                      <div
-                        className="interiorTrimsImages"
-                        onClick={() => handleTrimId(index)}
-                      >
-                        <img
-                          className="interiorTrimsImg"
-                          src={item.imageTrims}
-                          alt=""
-                        />
-                      </div>
-                    )
-                  }
-                )
+            {context?.carsList[carsListId]?.interior[upHolsteryId]?.trims !==
+            undefined
+              ? context?.carsList[carsListId]?.interior[
+                  upHolsteryId
+                ]?.trims.map((item, index) => {
+                  return (
+                    <div
+                      className="interiorTrimsImages"
+                      onClick={() => handleTrimId(index)}
+                    >
+                      <img
+                        className="interiorTrimsImg"
+                        src={item.imageTrims}
+                        alt=""
+                      />
+                    </div>
+                  )
+                })
               : ""}
           </div>
         </div>
@@ -242,18 +251,16 @@ const Build = (props: Props) => {
           <div className="options-category-list">
             <div
               className="options-category"
-              onClick={(e: any) => handleOptionsId(0, e.target.textContent)}
+              onClick={(e) => handleOptionsId(0, e.target.textContent)}
             >
               All
             </div>
-            {urls[carsListId].options.map((item: any, index: any) => {
+            {context?.carsList[carsListId]?.options?.map((item, index) => {
               return (
                 <div
                   className="options-category"
                   key={index}
-                  onClick={(e: any) =>
-                    handleOptionsId(index, e.target.textContent)
-                  }
+                  onClick={(e) => handleOptionsId(index, e.target.textContent)}
                 >
                   {item.category}
                 </div>
@@ -263,8 +270,8 @@ const Build = (props: Props) => {
 
           <div className="options-items">
             {optionsTypeToggle.category === "All"
-              ? urls[carsListId].options.map((item: any) => {
-                  return item.optionList.map((item: any, index: any) => {
+              ? context?.carsList[carsListId]?.options.map((item) => {
+                  return item.optionList.map((item, index) => {
                     return (
                       <div className="options-item" key={index}>
                         <img src={item.image} className="options-img" alt="" />
@@ -277,11 +284,11 @@ const Build = (props: Props) => {
                     )
                   })
                 })
-              : urls[carsListId].options
+              : context?.carsList[carsListId]?.options
                   .filter(
-                    (item: any) => item.category === optionsTypeToggle.category
+                    (item) => item.category === optionsTypeToggle.category
                   )[0]
-                  .optionList.map((item: any, index: any) => {
+                  .optionList.map((item, index) => {
                     return (
                       <div className="options-item" key={index}>
                         <img src={item.image} className="options-img" alt="" />

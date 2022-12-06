@@ -5,6 +5,7 @@ import optionsObjectListSlice from "../features/optionsForm/optionsObjectListSli
 import saveOptionsSlice from "../features/optionsForm/saveOptions"
 import isOptionSaveSlice from "../features/optionsForm/isOptionSaveSlice"
 import createCarFormSlice from "../features/createCarForm/createCarFormSlice"
+import selectedCarSlice from "../features/selectedCar/selectedCarSlice"
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     saveOptions: saveOptionsSlice,
     isSaveOption: isOptionSaveSlice,
     createCarForm: createCarFormSlice,
+    selectedCar: selectedCarSlice,
   },
 })
 

@@ -52,6 +52,13 @@ const StyledNavbar = () => {
         >
           My Cars
         </NavLink>
+        <NavLink
+          className="navbar__links"
+          to="/selected-car"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        >
+          Selected Car
+        </NavLink>
       </header>
 
       <Outlet />
