@@ -1,26 +1,73 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../../../hooks/hooks"
+import React, { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
 import { registrationSlice, loginSlice } from "../../../features/auth/authSlice"
+import Stack from "@mui/material/Stack"
+import Snackbar from "@mui/material/Snackbar"
+import MuiAlert from "@mui/material/Alert"
+
 import "./style.css"
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+})
 
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState(false)
+  const navigate = useNavigate()
 
-  const user = useAppSelector((state) => state.auth)
+  const user = useSelector((state) => state.auth)
 
   console.log(user)
 
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
 
   const handleSignIn = (e) => {
     e.preventDefault()
     dispatch(loginSlice({ email: email, password: password }))
   }
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return
+    }
+
+    setError(false)
+  }
+
+  useEffect(() => {
+    if (user.isAuthLogin) {
+      setEmail("")
+      setPassword("")
+      navigate("/")
+    }
+
+    if (user.error.message) {
+      setError(true)
+    }
+  }, [user])
+
   return (
     <>
+      {user.error.message && (
+        <>
+          <Stack spacing={2} sx={{ width: "100%" }}>
+            <Snackbar
+              open={error}
+              autoHideDuration={6000}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+            >
+              <Alert severity="info">{user.error.message}</Alert>
+            </Snackbar>
+          </Stack>
+        </>
+      )}
       <form method="post">
         <h1 className="form-title">Sign in</h1>
         <section>
@@ -48,20 +95,12 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          <button
-            id="toggle-password"
-            type="button"
-            aria-label="Show password as plain text. Warning: this will display your password on the screen."
-          >
-            Show password
-          </button>
-          <div id="password-constraints">
-            Eight or more characters, with at least one&nbsp;lowercase and one
-            uppercase letter.
-          </div>
+          <div id="password-constraints">Eight or more characters.</div>
         </section>
         <div className="form-footer">
-          <div className="footer-item">Create account</div>
+          <div className="footer-item">
+            <Link to="/registration">Create account</Link>
+          </div>
           <div className="footer-item">
             <button id="signin" onClick={(e) => handleSignIn(e)}>
               Sign in

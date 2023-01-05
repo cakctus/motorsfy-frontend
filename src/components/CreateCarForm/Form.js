@@ -211,7 +211,7 @@ const Form = () => {
   }
 
   // console.log(cars)
-  console.log(carsList)
+  // console.log(carsList)
   // console.log(categoryOptions)
   // console.log(optionList)
   // console.log(optionsObject)

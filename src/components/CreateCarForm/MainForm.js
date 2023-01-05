@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from "react"
+import React, { useState, useContext, useRef } from "react"
 import Context from "./formContext"
 import CarInfoForm from "./CreateCarInfoForm/CarInfoForm"
 import ExteriorForm from "./ExteriorForm/ExteriorForm"
@@ -17,21 +17,11 @@ const MainForm = () => {
   const dispatch = useDispatch()
 
   const arrayHeader = [
-    <div className="carinfo-form">
-      <CarInfoForm />
-    </div>,
-    <div className="exterior-form">
-      <ExteriorForm />
-    </div>,
-    <div className="interior-form">
-      <InteriorForm />
-    </div>,
-    <div className="options-form">
-      <OptionsForm />
-    </div>,
-    <div className="options-form">
-      <Preview />
-    </div>,
+    <CarInfoForm />,
+    <ExteriorForm />,
+    <InteriorForm />,
+    <OptionsForm />,
+    <Preview />,
   ]
 
   return (
@@ -72,11 +62,7 @@ const MainForm = () => {
             </div>
           )
         })}
-        <input type="reset" value="add another car" />
       </form>
-      <div id="detail">
-        <Outlet />
-      </div>
     </>
   )
 }

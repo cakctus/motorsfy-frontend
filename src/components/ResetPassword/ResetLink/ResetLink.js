@@ -8,7 +8,7 @@ const ResetLink = () => {
   let { link } = useParams()
 
   const sendPasswordLink = async () => {
-    return axios.post(`http://localhost:5000/api/change-password/:${link}`, {
+    return axios.post(`http://localhost:5000/api/change-password/${link}`, {
       newPassword,
     })
   }

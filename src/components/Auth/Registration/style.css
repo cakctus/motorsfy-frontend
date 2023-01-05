@@ -4,26 +4,6 @@
   --desktop-font-size: 18px;
 }
 
-body {
-  font-family: sans-serif;
-  font-weight: 500;
-  margin: 20px 15px 0 15px;
-}
-
-button#sign-up {
-  background-color: black;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  color: #eee;
-  cursor: pointer;
-  display: block;
-  font-size: 20px; /* fallback */
-  font-size: var(--small-mobile-font-size);
-  font-weight: 400;
-  margin: 3px 0 0 0;
-  padding: 14px;
-}
-
 button:disabled {
   color: #888;
   cursor: default;
@@ -57,6 +37,10 @@ div#password-constraints {
 form {
   margin: 0 0 20px 0;
   padding: 0 0 80px 0;
+  /* box-shadow: 5px 5px 15px 1px rgb(0 0 0 / 70%); */
+  border-radius: 15px;
+  box-shadow: 0 0 22px rgb(0 0 0 / 44%);
+  /* background-color: #171717; */
 }
 
 h1 {
@@ -126,6 +110,38 @@ textarea {
   padding: 12px;
   width: 90%; /* fallback */
   width: calc(100% - 30px); /* full width minus padding */
+}
+
+.info-msg,
+.success-msg,
+.warning-msg,
+.error-msg {
+  margin: 10px 0;
+  padding: 10px 5px 10px 5px;
+  border-radius: 3px 3px 3px 3px;
+  width: 90%; /* fallback */
+  width: calc(100% - 30px);
+}
+.info-msg {
+  color: #059;
+  background-color: #bef;
+}
+.success-msg {
+  color: #270;
+  background-color: #dff2bf;
+}
+.warning-msg {
+  color: #9f6000;
+  background-color: #feefb3;
+}
+.error-msg {
+  color: #d8000c;
+  background-color: #ffbaba;
+}
+
+.signin-successfull {
+  margin-left: 5px;
+  text-decoration: underline;
 }
 
 @media (min-width: 400px) {

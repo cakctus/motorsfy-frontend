@@ -3,12 +3,6 @@
   --mobile-font-size: 22px;
 }
 
-body {
-  font-family: sans-serif;
-  font-weight: 500;
-  margin: 10px 20px;
-}
-
 button {
   background-color: #eee;
   border: 1px solid #ccc;
@@ -46,8 +40,6 @@ div#password-constraints {
 }
 
 form {
-  border: 1px solid silver;
-  border-radius: 5px;
   padding: 1rem;
   margin: 1rem auto 0 auto;
   max-width: 500px;

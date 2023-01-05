@@ -5,6 +5,7 @@ import {
   changeOptionId,
   changeOptionItemId,
 } from "../../../features/selectedCar/selectedCarSlice"
+import OptionsListItem from "./OptionsListItem/OptionsListItem"
 
 const Options = () => {
   const { togleType, handleOptionsId, urls, carsListId, optionsTypeToggle } =
@@ -53,16 +54,17 @@ const Options = () => {
           ? urls[carsListId].options.map((item) => {
               return item.optionList.map((item, index) => {
                 return (
-                  <div
-                    className="options-item"
-                    key={index}
-                    onClick={() => optionCategoryItem(item)}
-                  >
-                    <img src={item.image} className="options-img" alt="" />
-                    <p className="options-title">{item.title}</p>
-                    <p className="options-price">{item.price}</p>
-                    <p className="options-description">{item.description}</p>
-                  </div>
+                  <OptionsListItem item={item} key={index} />
+                  // <div
+                  //   className="options-item"
+                  //   key={index}
+                  //   onClick={() => optionCategoryItem(item)}
+                  // >
+                  //   <img src={item.image} className="options-img" alt="" />
+                  //   <p className="options-title">{item.title}</p>
+                  //   <p className="options-price">{item.price}</p>
+                  //   <p className="options-description">{item.description}</p>
+                  // </div>
                 )
               })
             })

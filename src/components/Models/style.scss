@@ -1,0 +1,9 @@
+.models-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .model-item {
+    width: 33%;
+  }
+}

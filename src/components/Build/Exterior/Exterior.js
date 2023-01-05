@@ -21,7 +21,7 @@ const Exterior = () => {
 
   const handleCar = (index) => {
     handleCarId(index)
-    // dispatch(changeCarColor(index))
+    dispatch(changeCarColor(index))
   }
 
   const handleWheel = (index) => {
@@ -48,15 +48,13 @@ const Exterior = () => {
       <div className="imageColorContainer">
         {urls.map((item, index) => {
           return (
-            <>
-              <div
-                className="imageColorItem"
-                key={item.id}
-                onClick={() => handleCar(index)}
-              >
-                <img src={item.color} alt="" />
-              </div>
-            </>
+            <div
+              className="imageColorItem"
+              key={item.id}
+              onClick={() => handleCar(index)}
+            >
+              <img src={item.color} alt="" />
+            </div>
           )
         })}
       </div>

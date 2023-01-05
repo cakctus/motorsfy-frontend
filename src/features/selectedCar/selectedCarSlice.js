@@ -35,6 +35,10 @@ const selectedCarSlice = createSlice({
       ...state,
       imageUpholstery: action.payload,
     }),
+    changeimageTrim: (state, action) => ({
+      ...state,
+      imageTrims: action.payload,
+    }),
     changeOptionId: (state, action) => {
       const array = [...state.optionId, action.payload]
       const unique = [...new Set(array)]
@@ -51,6 +55,15 @@ const selectedCarSlice = createSlice({
         optionItemId: unique,
       }
     },
+    deleteOptionItem: (state, action) => {
+      const prevState = state.optionItemId.filter(
+        (item) => item.title !== action.payload
+      )
+      return {
+        ...state,
+        optionItemId: prevState,
+      }
+    },
   },
 })
 
@@ -59,8 +72,9 @@ export const {
   changeCarWheel,
   changeInteriorId,
   changeimageUpholstery,
-  changeimageTrims,
+  changeimageTrim,
   changeOptionId,
   changeOptionItemId,
+  deleteOptionItem,
 } = selectedCarSlice.actions
 export default selectedCarSlice.reducer

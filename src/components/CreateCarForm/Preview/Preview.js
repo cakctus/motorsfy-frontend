@@ -130,15 +130,13 @@ const Build = () => {
           <div className="imageColorContainer">
             {context?.carsList.map((item, index) => {
               return (
-                <>
-                  <div
-                    className="imageColorItem"
-                    key={item.id}
-                    onClick={() => handleCarId(index)}
-                  >
-                    <img src={item.color} alt="" />
-                  </div>
-                </>
+                <div
+                  className="imageColorItem"
+                  key={index}
+                  onClick={() => handleCarId(index)}
+                >
+                  <img src={item.color} alt="" />
+                </div>
               )
             })}
           </div>
@@ -229,6 +227,7 @@ const Build = () => {
                     <div
                       className="interiorTrimsImages"
                       onClick={() => handleTrimId(index)}
+                      key={index}
                     >
                       <img
                         className="interiorTrimsImg"
@@ -270,7 +269,7 @@ const Build = () => {
 
           <div className="options-items">
             {optionsTypeToggle.category === "All"
-              ? context?.carsList[carsListId]?.options.map((item) => {
+              ? context?.carsList[carsListId]?.options?.map((item) => {
                   return item.optionList.map((item, index) => {
                     return (
                       <div className="options-item" key={index}>
@@ -288,7 +287,7 @@ const Build = () => {
                   .filter(
                     (item) => item.category === optionsTypeToggle.category
                   )[0]
-                  .optionList.map((item, index) => {
+                  .optionList?.map((item, index) => {
                     return (
                       <div className="options-item" key={index}>
                         <img src={item.image} className="options-img" alt="" />

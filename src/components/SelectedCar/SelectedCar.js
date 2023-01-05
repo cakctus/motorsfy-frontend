@@ -21,7 +21,7 @@ const SelectedCar = () => {
         return flat.concat(toFlatten)
       }, [])
     })
-  }, [car.optionItemId])
+  }, [car.carColor, car.optionItemId])
 
   return (
     <>
@@ -49,7 +49,7 @@ const SelectedCar = () => {
       <div className="imgContainer" id="imgContainer">
         <img
           className="imageId"
-          src={cars[car.carColor].interior[car.interiorId].imageUpholstery}
+          src={cars[car.carColor].interior[car.imageUpholstery].imageUpholstery}
           alt=""
         />
       </div>
@@ -58,15 +58,16 @@ const SelectedCar = () => {
         <img
           className="imageId"
           src={
-            cars[car.carColor].interior[car.interiorId].trims[car.imageTrims]
-              .imageTrims
+            cars[car.carColor].interior[car.imageUpholstery]?.trims[
+              car.imageTrims
+            ].imageTrims
           }
           alt=""
         />
       </div>
       <h2>Options</h2>
       <div className="imgContainer" id="imgContainer">
-        {car.optionItemId.map((item, index) => {
+        {/* {car.optionItemId.map((item, index) => {
           return (
             <div className="options-item" key={index}>
               <img src={item.image} className="options-img" alt="" />
@@ -75,7 +76,26 @@ const SelectedCar = () => {
               <p className="options-description">{item.description}</p>
             </div>
           )
-        })}
+        })} */}
+        {car.optionItemId
+          .filter((value, index, self) => {
+            return (
+              index ===
+              self.findIndex((t) => {
+                return t.title === value.title
+              })
+            )
+          })
+          .map((item, id) => {
+            return (
+              <div className="options-item" key={id}>
+                <img src={item.image} className="options-img" alt="" />
+                <p className="options-title">{item.title}</p>
+                <p className="options-price">{item.price}</p>
+                <p className="options-description">{item.description}</p>
+              </div>
+            )
+          })}
       </div>
     </>
   )

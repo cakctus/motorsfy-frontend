@@ -24,6 +24,20 @@ const StyledNavbar = () => {
         >
           Home
         </NavLink>
+        <NavLink
+          className="navbar__links"
+          to="/brands"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        >
+          Brands
+        </NavLink>
+        <NavLink
+          className="navbar__links"
+          to="/configurator"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        >
+          Configurator
+        </NavLink>
         {auth ? (
           <NavLink
             className="navbar__links"

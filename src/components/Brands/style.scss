@@ -1,0 +1,12 @@
+.brands-list {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .brands-items {
+    width: 50%;
+  }
+}

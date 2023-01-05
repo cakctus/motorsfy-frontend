@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import {
   changeInteriorId,
   changeimageUpholstery,
-  changeimageTrims,
+  changeimageTrim,
 } from "../../../features/selectedCar/selectedCarSlice"
 
 const Interior = () => {
@@ -24,12 +24,12 @@ const Interior = () => {
   const upholsteryCar = (index) => {
     handleUpHostery(index)
     changeInteriorId(index)
-    changeimageUpholstery(index)
+    dispatch(changeimageUpholstery(index))
   }
 
   const trimCar = (index) => {
     handleTrimId(index)
-    changeimageTrims(index)
+    dispatch(changeimageTrim(index))
   }
 
   return (
@@ -91,6 +91,7 @@ const Interior = () => {
                 <div
                   className="interiorTrimsImages"
                   onClick={() => trimCar(index)}
+                  key={index}
                 >
                   <img
                     className="interiorTrimsImg"
