@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack"
 import Snackbar from "@mui/material/Snackbar"
 import MuiAlert from "@mui/material/Alert"
 
-import "./style.css"
+import "./style.scss"
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
@@ -19,8 +19,6 @@ const Login = () => {
   const navigate = useNavigate()
 
   const user = useSelector((state) => state.auth)
-
-  console.log(user)
 
   const dispatch = useDispatch()
 
@@ -38,20 +36,20 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (user.isAuthLogin) {
+    if (user.isAuth) {
       setEmail("")
       setPassword("")
       navigate("/")
     }
 
-    if (user.error.message) {
+    if (user?.error?.message) {
       setError(true)
     }
   }, [user])
 
   return (
     <>
-      {user.error.message && (
+      {user?.error?.message && (
         <>
           <Stack spacing={2} sx={{ width: "100%" }}>
             <Snackbar
@@ -70,7 +68,7 @@ const Login = () => {
       )}
       <form method="post">
         <h1 className="form-title">Sign in</h1>
-        <section>
+        <div className="input-container">
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -82,8 +80,8 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
-        </section>
-        <section>
+        </div>
+        <div className="input-container">
           <label htmlFor="current-password">Password</label>
           <input
             id="current-password"
@@ -96,8 +94,8 @@ const Login = () => {
             value={password}
           />
           <div id="password-constraints">Eight or more characters.</div>
-        </section>
-        <div className="form-footer">
+        </div>
+        <div className="form-footer-login">
           <div className="footer-item">
             <Link to="/registration">Create account</Link>
           </div>

@@ -21,10 +21,11 @@ export const mainCategory = createApi({
     }),
     topEvByRange: build.query({
       query: () => `/top-ev-by-range/`,
+      keepUnusedDataFor: 1000,
     }),
     topCarsBySpeed: build.query({
       query: () => `/top-cars-by-speed/`,
-      keepUnusedDataFor: 1000,
+      keepUnusedDataFor: 10000,
     }),
     getBrandsBody: build.query({
       query: () => `/cars-brands-search-by-body/`,

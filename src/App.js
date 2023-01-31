@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import BaseRouter from "./routes/routes"
 import { checkAuthSlice } from "./features/auth/authSlice"
 import { useDispatch } from "react-redux"
+import "./style.scss"
 
 function App() {
   const dispatch = useDispatch()

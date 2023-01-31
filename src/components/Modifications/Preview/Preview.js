@@ -1,3 +1,5 @@
+import "./style.scss"
+
 const Preview = ({ ress }) => {
   const o = ress
   const exclude = new Set([
@@ -31,29 +33,51 @@ const Preview = ({ ress }) => {
   } = Object.fromEntries(Object.entries(o).filter((e) => !exclude.has(e[0])))
 
   return (
-    <div>
-      <h1>
-        {cars_generation.name} {name}
-      </h1>
-      <h2>
-        {start_prod} - {end_prod}
-      </h2>
-
-      <div>
-        <img src={`http://localhost:5000/${image}`} width="400" alt="" />
+    <div className="container">
+      <div className="preview-container">
+        <h1>
+          {cars_generation.name} {name}
+        </h1>
+        <h2>
+          {start_prod} - {end_prod}
+        </h2>
+        <div>
+          <img src={`http://localhost:5000/${image}`} width="400" alt="" />
+        </div>
+        <div className="basic">
+          {body_type || seats || doors || powertrain_architecture === true ? (
+            <h2 className="item-title">Basics</h2>
+          ) : null}
+          <dl className="fancy-description-list">
+            {body_type?.length > 0 && (
+              <>
+                <dt className="item-title-color-mod">Body type</dt>
+                <dd> {body_type}</dd>
+              </>
+            )}
+            {seats?.length > 0 && (
+              <>
+                <dt className="item-title-color-mod">Seats</dt>
+                <dd>{seats}</dd>
+              </>
+            )}
+            {doors?.length > 0 && (
+              <>
+                <dt className="item-title-color-mod">Doors</dt>
+                <dd> {doors}</dd>
+              </>
+            )}
+            {powertrain_architecture?.length > 0 && (
+              <>
+                <dt className="item-title-color-mod">
+                  Powertrain architecture:
+                </dt>
+                <dd>{powertrain_architecture}</dd>
+              </>
+            )}
+          </dl>
+        </div>
       </div>
-
-      <p>
-        <span>Body type:</span>
-        {body_type}
-      </p>
-      <p>
-        <span>Seats:</span> {seats} <span>Doors:</span> {doors}
-      </p>
-      <p>
-        <span>Powertrain architecture:</span>
-        {powertrain_architecture}
-      </p>
     </div>
   )
 }

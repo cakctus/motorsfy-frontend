@@ -1,5 +1,5 @@
-import React from "react"
 import { check } from "../Check/check"
+import checkAnyValues from "../CheckValues/CheckValues"
 
 const SpaceVolume = ({ ress }) => {
   const obj = ress["cars_spacevolumeweights"]
@@ -10,10 +10,10 @@ const SpaceVolume = ({ ress }) => {
     const result = ress[str]
     if (result) {
       return (
-        <p key={index}>
-          <span>{check(str)}:</span>
-          {result}
-        </p>
+        <dl className="fancy-description-list" key={index}>
+          <dt className="item-title-color-mod">{check(str)}</dt>
+          <dd>{result}</dd>
+        </dl>
       )
     }
   }
@@ -21,7 +21,11 @@ const SpaceVolume = ({ ress }) => {
     <>
       {ress["cars_spacevolumeweights"] && (
         <>
-          <h3>Space & Volume</h3>
+          {checkAnyValues(obj) || (
+            <>
+              <h2 className="item-title">Space & Volume</h2>
+            </>
+          )}
           <div>
             {Object.keys(obj)
               .filter((key) => key !== "id")

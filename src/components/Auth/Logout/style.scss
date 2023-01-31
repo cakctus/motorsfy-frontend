@@ -1,0 +1,49 @@
+.form-title {
+  text-align: center;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  padding: 0 0 5px 0;
+}
+
+input {
+  border: 1px solid #ccc;
+  font-size: 22px; /* fallback */
+  font-size: var(--mobile-font-size);
+  padding: 15px;
+  border-radius: 5px;
+  width: 90%; /* fallback */
+  width: calc(100% - 30px); /* full width minus padding */
+}
+
+input[type="email"]:not(:focus):invalid,
+input[type="password"]:not(:focus):invalid {
+  color: red;
+  outline-color: red;
+}
+
+label {
+  display: block;
+  font-size: 20px;
+  font-size: var(--mobile-font-size);
+  font-weight: 500;
+  margin: 0 0 3px 0;
+}
+
+form section {
+  margin: 0 0 20px 0;
+  position: relative; /* for password toggle positioning */
+}

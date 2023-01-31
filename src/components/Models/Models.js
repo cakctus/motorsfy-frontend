@@ -9,7 +9,7 @@ const Models = () => {
 
   if (isLoading) {
     return (
-      <div>
+      <div className="container">
         <h3>Loading...</h3>
       </div>
     )
@@ -35,27 +35,40 @@ const Models = () => {
   }
 
   return (
-    <div>
-      {brandName}
-      <div className="models-list">
-        {data.map((item) => {
-          return (
-            <article className="model-item" key={item.id}>
-              <h1>{item.name}</h1>
-              <div>
-                <Link to={`model/${item.id}/`}>
-                  <img
-                    src={`http://localhost:5000/${item.image}`}
-                    data-src={`http://localhost:5000/${item.image}`}
-                    loading="lazy"
-                    alt="…"
-                    width="450"
-                  />
-                </Link>
-              </div>
-            </article>
-          )
-        })}
+    <div className="container">
+      <div>
+        <div className="breadcrumb">
+          <ul className="breadcrumb-list">
+            <li className="breadcrumb-item">
+              <Link to="/">
+                Home <span className="breadcrumb-slash">/</span>
+              </Link>
+            </li>
+            <li className="breadcrumb-item">
+              <Link to="/brands">All brands</Link>
+            </li>
+          </ul>
+        </div>
+        <div className="models-list">
+          {data.map((item) => {
+            return (
+              <article className="model-item" key={item.id}>
+                <div className="model-item-img">
+                  <Link to={`model/${item.id}/`}>
+                    <img
+                      src={`http://localhost:5000/${item.image}`}
+                      data-src={`http://localhost:5000/${item.image}`}
+                      loading="lazy"
+                      alt={`${item.name}`}
+                      width="250"
+                    />
+                  </Link>
+                </div>
+                <h1>{item.name}</h1>
+              </article>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

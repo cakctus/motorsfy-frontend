@@ -4,6 +4,7 @@ import { useGetGenerationsMainQuery } from "../../redux/carsApi"
 import { Link } from "react-router-dom"
 import GenerationModel from "./GenerationModel/GenerationModel"
 import Modifications from "../Modifications/Modifications"
+// import "./style.scss"
 
 const Generations = () => {
   const { modelId } = useParams()
@@ -35,32 +36,55 @@ const Generations = () => {
 
   if (isLoading) {
     return (
-      <div>
+      <div className="container">
         <h3>Loading...</h3>
       </div>
     )
   }
 
   return (
-    <div>
-      {data.map((item) => {
-        return (
-          <article key={item.id}>
-            <div>
-              {/* <Link to={`generation/${item.id}`}> */}
-              <img
-                src={`http://localhost:5000/${item.image}`}
-                alt=""
-                width="450"
-                onClick={() => handleModal(item.id)}
-              />
-              {/* </Link> */}
-              {isModal && handleModal}
-            </div>
-            <h1>{item.name}</h1>
-          </article>
-        )
-      })}
+    <div className="container">
+      <div className="breadcrumb">
+        <ul className="breadcrumb-list">
+          <li className="breadcrumb-item">
+            <Link to="/">
+              Home <span className="breadcrumb-slash">/</span>
+            </Link>
+          </li>
+          <li className="breadcrumb-item">
+            <Link to="/brands">
+              All brands <span className="breadcrumb-slash">/</span>
+            </Link>
+          </li>
+          <li className="breadcrumb-item">
+            <Link to={`/brands/${data[0]?.cars_model?.cars_brand?.name}`}>
+              {data[0]?.cars_model?.cars_brand?.name}{" "}
+              <span className="breadcrumb-slash">/</span>
+            </Link>
+          </li>
+          <li className="breadcrumb-item">{data[0]?.cars_model?.name}</li>
+        </ul>
+      </div>
+      <div className="generation-list">
+        {data.map((item) => {
+          return (
+            <article className="generation-item" key={item.id}>
+              <div>
+                {/* <Link to={`generation/${item.id}`}> */}
+                <img
+                  src={`http://localhost:5000/${item.image}`}
+                  alt=""
+                  width="450"
+                  onClick={() => handleModal(item.id)}
+                />
+                {/* </Link> */}
+                {isModal && handleModal}
+              </div>
+              <h1>{item.name}</h1>
+            </article>
+          )
+        })}
+      </div>
       {isModal && (
         <GenerationModel
           setVisible={setIsModal}

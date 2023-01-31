@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react"
 import GenerationModel from "../../Generations/GenerationModel/GenerationModel"
 import Modifications from "../../Modifications/Modifications"
 
-const SearchResultBodyType = ({ data = [] }) => {
+const SearchResultBodyType = ({ data = [], generationRef }) => {
   const [isModal, setIsModal] = useState(false)
   const [generationId, setGenerationId] = useState(null)
   const [h, setH] = useState(0)
@@ -24,17 +24,20 @@ const SearchResultBodyType = ({ data = [] }) => {
     }
   }
 
-  if (data.length === 0) {
-    return <div>Sorry not data</div>
-  }
+  // if (data.length === 0) {
+  //   return <div>Sorry not data</div>
+  // }
 
   return (
-    <div className="search-result">
+    <div className="generation-list" ref={generationRef}>
       {data !== undefined &&
         data.map((item) => {
           return (
-            <article key={item.id}>
-              <div onClick={() => handleModal(item.id)}>
+            <article className="generation-item" key={item.id}>
+              <div
+                className="generation-item-detail"
+                onClick={() => handleModal(item.id)}
+              >
                 {/* <Link to={`generation/${item.id}`}> */}
                 <img
                   src={`http://localhost:5000/${item.image}`}

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { logoutSlice } from "../../../features/auth/authSlice"
 
+import "./style.scss"
+
 const Logout = () => {
   const dispatch = useDispatch()
 

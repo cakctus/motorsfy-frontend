@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useGetBodySearchResultQuery } from "../../../redux/mainCategory"
 import ListBrands from "./ListBrands/ListBrands"
 import ListBody from "./ListBodyTypes/ListBody"
@@ -12,7 +12,6 @@ const SearchCarByBody = () => {
   const searchParams = new URLSearchParams(params)
   const {
     data = [],
-    isLoading,
     isSuccess,
     refetch,
   } = useGetBodySearchResultQuery(searchParams.toString())
@@ -20,6 +19,7 @@ const SearchCarByBody = () => {
   const [page, setPage] = useState(10)
   const [cars, setCars] = useState(data?.data?.slice(0, 10))
   const [isTop, setIsTop] = useState(0)
+  const generationRef = useRef(null)
 
   const handleSearch = () => {
     refetch()
@@ -41,9 +41,13 @@ const SearchCarByBody = () => {
   }, [])
 
   const scrollHandler = (e) => {
+    const header = document.querySelector("header")
+    const searchContainer = document.querySelector(".search-container")
+    const total = header.offsetHeight + searchContainer.offsetHeight
+
     if (
       window.innerHeight + e.target.documentElement.scrollTop + 1 >=
-      e.target.documentElement.scrollHeight
+      generationRef?.current.scrollHeight + total
     ) {
       setFetching(true)
       setPage((prev) => prev + 10)
@@ -51,34 +55,37 @@ const SearchCarByBody = () => {
     setIsTop(window.pageYOffset)
   }
 
-  console.log(fetching)
-  console.log(cars)
-  // console.log(data?.data?.slice(0, 10))
-
   return (
-    <main className="search-form">
-      <div
-        onClick={() => window.scrollTo(0, 0)}
-        id="myBtn"
-        style={{ display: isTop > 400 ? "block" : "none" }}
-      >
-        <button>Top</button>
-      </div>
+    <>
       <div className="search-container">
-        <ListBrands setIsButtonDisable={setIsButtonDisable} />
-        <ListBody setIsButtonDisable={setIsButtonDisable} />
+        <main className="search-form">
+          <div
+            onClick={() => window.scrollTo(0, 0)}
+            id="myBtn"
+            style={{ display: isTop > 400 ? "block" : "none" }}
+          >
+            <button>Top</button>
+          </div>
+          <div className="search-container">
+            <ListBrands setIsButtonDisable={setIsButtonDisable} />
+            <ListBody setIsButtonDisable={setIsButtonDisable} />
+            <div>
+              <button
+                disabled={isButtonDisablem ? false : true}
+                onClick={handleSearch}
+              >
+                search
+              </button>
+            </div>
+          </div>
+        </main>
       </div>
-      <div>
-        <button
-          disabled={isButtonDisablem ? false : true}
-          onClick={handleSearch}
-        >
-          search
-        </button>
-        {isLoading && <h1>Loading ...</h1>}
+      <div className="container">
+        {isSuccess && (
+          <SearchResultBodyType data={cars} generationRef={generationRef} />
+        )}
       </div>
-      {isSuccess && <SearchResultBodyType data={cars} />}
-    </main>
+    </>
   )
 }
 

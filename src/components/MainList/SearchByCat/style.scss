@@ -1,13 +1,21 @@
-#myBtn {
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
-  font-size: 18px;
-  border: none;
-  outline: none;
-  color: white;
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 4px;
+.search-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+
+  select {
+    height: 50px;
+  }
+
+  button {
+    height: 50px;
+  }
+}
+
+.search-brands {
+  width: 200px;
 }

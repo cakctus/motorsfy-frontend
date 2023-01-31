@@ -1,4 +1,5 @@
 import { check } from "../Check/check"
+import checkAnyValues from "../CheckValues/CheckValues"
 
 const ElectricsHybrids = ({ ress }) => {
   const obj = ress["cars_electriccarshybrids"]
@@ -9,10 +10,10 @@ const ElectricsHybrids = ({ ress }) => {
     const result = ress[str]
     if (result) {
       return (
-        <p key={index}>
-          <span>{check(str)}:</span>
-          {result}
-        </p>
+        <dl className="fancy-description-list" key={index}>
+          <dt className="item-title-color-mod">{check(str)}</dt>
+          <dd>{result}</dd>
+        </dl>
       )
     }
   }
@@ -21,7 +22,11 @@ const ElectricsHybrids = ({ ress }) => {
     <>
       {ress["cars_electriccarshybrids"] && (
         <>
-          <h3>Electrics & Hybrids</h3>
+          {checkAnyValues(obj) || (
+            <>
+              <h2 className="item-title">Electrics & Hybrids</h2>
+            </>
+          )}
           <div>
             {Object.keys(obj)
               .filter((key) => key !== "id")

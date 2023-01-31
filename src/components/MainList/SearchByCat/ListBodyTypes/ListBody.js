@@ -78,7 +78,7 @@ const ListBody = ({ setIsButtonDisable, setBodyType }) => {
   }
 
   return (
-    <div>
+    <div className="search-brands">
       <label htmlFor="cars">Body type</label>
       <select name="cars" id="cars" onChange={(event) => handleOptions(event)}>
         <option value="null" defaultValue>

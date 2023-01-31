@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { registration, login, logout } from "../../services/authServices"
-import axios from "axios"
+import {
+  registration,
+  login,
+  logout,
+  refresh,
+} from "../../services/authServices"
 
 const initialState = {
   user: {},
@@ -35,7 +39,6 @@ export const loginSlice = createAsyncThunk(
       const response = await login(payload.email, payload.password)
       const data = await response.data
       if (!data.statusText === "OK") throw new Error("Server Error")
-      console.log(data, "loginSlice")
       dispatch(setUser(data))
       dispatch(setError(""))
       dispatch(isAuthLogin(true))
@@ -52,10 +55,9 @@ export const logoutSlice = createAsyncThunk(
   "api/logout",
   async (_, { fulfillWithValue, dispatch }) => {
     try {
-      const response = await logout()
+      await logout()
       localStorage.removeItem("token")
-      localStorage.removeItem("user")
-      return response
+      dispatch(logoutUser(false))
     } catch (error) {
       fulfillWithValue(error.message)
     }
@@ -64,14 +66,10 @@ export const logoutSlice = createAsyncThunk(
 
 export const checkAuthSlice = createAsyncThunk("api/checkauth", async () => {
   try {
-    const response = await axios.get("http://localhost:5000/api/refresh", {
-      withCredentials: true,
-    })
+    const response = await refresh()
     const data = await response.data
-    console.log(data)
     localStorage.setItem("token", JSON.stringify(data.obj))
   } catch (error) {
-    console.log(error)
     localStorage.removeItem("token")
   }
 })
@@ -93,9 +91,12 @@ const authSlice = createSlice({
     }),
     isAuthLogin: (state, action) => ({
       ...state,
-      isAuthLogin: action.payload,
+      isAuth: action.payload,
     }),
-    logoutUser(state, action) {},
+    logoutUser: (state, action) => ({
+      ...state,
+      isAuth: action.payload,
+    }),
   },
   extraReducers: (builder) => {
     builder.addCase(registrationSlice.pending, (state, action) => {
@@ -104,8 +105,6 @@ const authSlice = createSlice({
     builder.addCase(registrationSlice.fulfilled, (state, action) => {
       state.isLoading = "Done"
       state.user = action.payload
-      // state.isAuth = true
-      // state.error = ""
     })
     builder.addCase(registrationSlice.rejected, (state, action) => {
       console.log(action.payload)
@@ -128,6 +127,6 @@ const authSlice = createSlice({
   },
 })
 
-const { setUser, setError, isAuth, isAuthLogin } = authSlice.actions
+const { setUser, setError, isAuth, isAuthLogin, logoutUser } = authSlice.actions
 
 export default authSlice.reducer

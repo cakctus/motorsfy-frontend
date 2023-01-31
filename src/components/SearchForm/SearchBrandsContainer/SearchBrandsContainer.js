@@ -4,6 +4,7 @@ import SearchModelsContainer from "../SearchModelsContainer/SearchModelsContaine
 import { useGetModelsQuery } from "../../../redux/searchApi"
 import { useSelector, useDispatch } from "react-redux"
 import { addBrandId } from "../../../features/searchForm/searchFormSlice"
+import SearchButton from "../SearchButton/SearchButton"
 
 const SearchBrandsContainer = ({
   brands,
@@ -84,6 +85,7 @@ const SearchBrandsContainer = ({
       <div>
         <SearchModelsContainer models={data} isSearch={isSearch} />
       </div>
+      <SearchButton />
     </>
   )
 }

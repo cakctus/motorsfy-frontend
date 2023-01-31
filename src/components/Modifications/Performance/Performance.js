@@ -1,4 +1,5 @@
 import { check } from "../Check/check"
+import checkAnyValues from "../CheckValues/CheckValues"
 
 const Performance = ({ ress }) => {
   const obj = ress["cars_performance"] ? ress["cars_performance"] : {}
@@ -7,10 +8,10 @@ const Performance = ({ ress }) => {
     const result = ress[str]
     if (result) {
       return (
-        <p key={index}>
-          <span>{check(str)}:</span>
-          {result}
-        </p>
+        <dl className="fancy-description-list" key={index}>
+          <dt className="item-title-color-mod">{check(str)}</dt>
+          <dd>{result}</dd>
+        </dl>
       )
     }
   }
@@ -19,7 +20,11 @@ const Performance = ({ ress }) => {
     <>
       {ress["cars_performance"] && (
         <>
-          <h3>Performance</h3>
+          {checkAnyValues(obj) || (
+            <>
+              <h2 className="item-title">Performance</h2>
+            </>
+          )}
           <div>
             {Object.keys(obj)
               .filter((key) => key !== "id")

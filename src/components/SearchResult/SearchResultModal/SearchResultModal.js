@@ -13,6 +13,7 @@ const SearchResultModal = ({ children, setVisible, isModal, h, setH }) => {
       display: "flex",
       justifyContent: "flex-end",
       overflowY: "scroll",
+      zIndex: "999",
       // height: "max-content",
     },
 
@@ -21,7 +22,7 @@ const SearchResultModal = ({ children, setVisible, isModal, h, setH }) => {
       background: "white",
       borderRadius: "5px",
       //   width: "50vw",
-      minHeight: `${h}px`,
+      minHeight: `${h + 20}px`,
       width: `50vw`,
       background: "#2E2E2E",
       //   transition: "margin 1s",

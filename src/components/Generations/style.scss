@@ -1,0 +1,20 @@
+.generation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.generation-item {
+  width: 350px;
+
+  .generation-item-detail {
+    width: 350px;
+  }
+
+  img {
+    width: 350px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

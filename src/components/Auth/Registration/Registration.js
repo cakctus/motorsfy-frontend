@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack"
 import Snackbar from "@mui/material/Snackbar"
 import MuiAlert from "@mui/material/Alert"
 
-import "./style.css"
+import "./style.scss"
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
@@ -25,7 +25,12 @@ const Registration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (password === password2) {
+    if (
+      password === password2 &&
+      email.length > 0 &&
+      password.length > 8 &&
+      password2.length > 8
+    ) {
       dispatch(registrationSlice({ email: email, password: password }))
       setError(false)
     }
@@ -72,7 +77,6 @@ const Registration = () => {
     }
   }, [user])
 
-  // console.log(error)
   return (
     <>
       <main>
@@ -104,9 +108,18 @@ const Registration = () => {
               </Stack>
             </>
           )}
-          <section>
+          <div className="input-container">
             <label htmlFor="email">
               <span>Email</span>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
               {emailError && (
                 <>
                   <Stack spacing={2} sx={{ width: "100%" }}>
@@ -125,17 +138,8 @@ const Registration = () => {
                 </>
               )}
             </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required=""
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-          </section>
-          <section>
+          </div>
+          <div className="input-container">
             <label htmlFor="password">
               <span>Password</span>
             </label>
@@ -144,17 +148,28 @@ const Registration = () => {
               name="password"
               type="password"
               autoComplete="new-password"
-              // minLength={8}
+              minLength={8}
               aria-describedby="password-constraints"
-              required=""
+              required
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
             <div id="password-constraints">Eight or more characters.</div>
-          </section>
-          <section>
+          </div>
+          <div className="input-container">
             <label htmlFor="password2">
               <span>Confirm password</span>
+              <input
+                id="password2"
+                name="password2"
+                type="password"
+                autoComplete="new-password"
+                minLength={8}
+                aria-describedby="password-constraints"
+                required
+                onChange={(e) => setPassword2(e.target.value)}
+                value={password2}
+              />
               {error && (
                 <>
                   <Stack spacing={2} sx={{ width: "100%" }}>
@@ -175,60 +190,18 @@ const Registration = () => {
                 </>
               )}
             </label>
-            <input
-              id="password2"
-              name="password2"
-              type="password"
-              autoComplete="new-password"
-              // minLength={8}
-              aria-describedby="password-constraints"
-              required=""
-              onChange={(e) => setPassword2(e.target.value)}
-              value={password2}
-            />
             <div id="password-constraints">Eight or more characters.</div>
-          </section>
-          <div className="form-footer">
+          </div>
+          <div className="form-footer-registration">
             <div className="footer-item">
               <Link to="/login">Already have an account? Signin</Link>
             </div>
             <div className="footer-item">
-              <button id="signin" onClick={handleSubmit}>
-                Sign up
-              </button>
+              <button id="signin">Sign up</button>
             </div>
           </div>
         </form>
       </main>
-
-      {/* <h1 className="mt-2">Sign up</h1>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          id="email"
-          placeholder="Email"
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          id="password"
-          placeholder="Password"
-        />
-      </div>
-      <button
-        onClick={() =>
-          dispatch(registrationSlice({ email: email, password: password }))
-        }
-      >
-        registration
-      </button> */}
     </>
   )
 }

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const API_URL = "http://localhost:5000/api"
+export const API_URL = "http://localhost:5000/api/"
 
 const auth = axios.create({
   withCredentials: true,
@@ -18,6 +18,7 @@ auth.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config
+    console.log("ss")
     if (
       error.response.status === 401 &&
       error.config &&

@@ -12,4 +12,8 @@ const logout = async (email: string, password: string) => {
   return auth.post("/logout")
 }
 
-export { registration, login, logout }
+const refresh = async () => {
+  return auth.get("/refresh")
+}
+
+export { registration, login, logout, refresh }

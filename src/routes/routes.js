@@ -24,6 +24,14 @@ import StyledNavbar from "./StyledNavbar"
 import Generations from "../components/Generations/Generations"
 import Modifications from "../components/Modifications/Modifications"
 import ModificationItem from "../components/Modifications/ModificationItem"
+import Profile from "../components/Profile/Profile"
+import CreateBrand from "../components/CarsCRUD/CreateBrand/CreateBrand"
+import CreateModel from "../components/CarsCRUD/CreateModel/CreateModel"
+import CreateGeneration from "../components/CarsCRUD/CreateGeneration/CreateGeneration"
+import CreateModification from "../components/CarsCRUD/CreateModification/CreateModification"
+import About from "../components/About/About"
+import Privacy from "../components/Privacy/Privacy"
+import Terms from "../components/Terms/Terms"
 
 const BaseRouter = () => {
   return (
@@ -56,6 +64,14 @@ const BaseRouter = () => {
             path="/new/modification/:modificationId"
             element={<ModificationItem />}
           />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/create-brand" element={<CreateBrand />} />
+          <Route path="/create-model" element={<CreateModel />} />
+          <Route path="/create-generation" element={<CreateGeneration />} />
+          <Route path="/create-modification" element={<CreateModification />} />
           <Route path="/fast" element={<TopBySpeed />} />
           <Route path="/evrange" element={<TopEv />} />
           <Route path="/body" element={<SearchCarByBody />} />

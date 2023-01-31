@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react"
-import { check } from "../Check/engine"
+import React, { useState } from "react"
 
 const ElectricEngines = ({ ress }) => {
   const [res, setRes] = useState(
@@ -9,9 +8,9 @@ const ElectricEngines = ({ ress }) => {
         )
       : []
   )
-  const obj = ress["cars_modification_electric_engine"]
-    ? ress["cars_modification_electric_engine"]
-    : {}
+  // const obj = ress["cars_modification_electric_engine"]
+  //   ? ress["cars_modification_electric_engine"]
+  //   : {}
 
   const generator = (ress, str, index) => {
     const entries = Object.entries(ress)
@@ -21,54 +20,55 @@ const ElectricEngines = ({ ress }) => {
 
     if (location) {
       return (
-        <p key={index}>
-          <span>Location:</span>
-          {location}
-        </p>
+        <dl className="fancy-description-list" key={index}>
+          <dt className="item-title-color-mod">Location</dt>
+          <dd>{location}</dd>
+        </dl>
       )
     }
 
     if (power) {
       return (
-        <p key={index}>
-          <span>Power:</span>
-          {power}
-        </p>
+        <dl className="fancy-description-list" key={index}>
+          <dt className="item-title-color-mod">Power</dt>
+          <dd>{power}</dd>
+        </dl>
       )
     }
+
     if (system_power) {
       return (
-        <p key={index}>
-          <span>System power:</span>
-          {system_power}
-        </p>
+        <dl className="fancy-description-list" key={index}>
+          <dt className="item-title-color-mod">System power</dt>
+          <dd>{system_power}</dd>
+        </dl>
       )
     }
 
     if (torque) {
       return (
-        <p key={index}>
-          <span>Torque:</span>
-          {torque}
-        </p>
+        <dl className="fancy-description-list" key={index}>
+          <dt className="item-title-color-mod">Torque</dt>
+          <dd> {torque}</dd>
+        </dl>
       )
     }
 
     if (system_troque) {
       return (
-        <p key={index}>
-          <span>System power:</span>
-          {system_power}
-        </p>
+        <dl className="fancy-description-list" key={index}>
+          <dt className="item-title-color-mod">System power</dt>
+          <dd>{system_troque}</dd>
+        </dl>
       )
     }
   }
 
   return (
     <>
-      {ress["cars_modification_electric_engine"].length && (
+      {ress["cars_modification_electric_engine"].length ? (
         <>
-          <h3>Electric Engines</h3>
+          <h2 className="item-title">Electric Engines</h2>
           {res.map((obj, index) => {
             return (
               <React.Fragment key={index}>
@@ -77,6 +77,8 @@ const ElectricEngines = ({ ress }) => {
             )
           })}
         </>
+      ) : (
+        ""
       )}
     </>
   )

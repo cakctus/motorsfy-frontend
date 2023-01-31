@@ -3,6 +3,8 @@ import { useGetBrandsQuery } from "../../redux/searchApi"
 import SearchBrandsContainer from "./SearchBrandsContainer/SearchBrandsContainer"
 import SearchButton from "./SearchButton/SearchButton"
 
+import "./style.scss"
+
 const SearchForm = () => {
   const { data, isLoading, isSuccess } = useGetBrandsQuery()
   const [isSearch, setIsSearch] = useState(false)
@@ -19,7 +21,6 @@ const SearchForm = () => {
             isSearch={isSearch}
           />
           {/* <SearchModelsContainer models={models} isSearch={isSearch} /> */}
-          <SearchButton />
         </div>
       </main>
     </>

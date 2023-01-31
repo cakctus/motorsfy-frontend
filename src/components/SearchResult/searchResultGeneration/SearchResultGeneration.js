@@ -14,8 +14,6 @@ const SearchResultGeneration = () => {
   const [h, setH] = useState(0)
   const height = useRef(null)
 
-  console.log(data)
-
   const handleModal = (id) => {
     setIsModal(true)
     setGenerationId(id)
@@ -39,32 +37,34 @@ const SearchResultGeneration = () => {
 
   if (isLoading) {
     return (
-      <div>
+      <div className="container">
         <h3>Loading...</h3>
       </div>
     )
   }
 
   return (
-    <div>
-      {data.map((item) => {
-        return (
-          <article key={item.id}>
-            <div>
-              {/* <Link to={`generation/${item.id}`}> */}
-              <img
-                src={`http://localhost:5000/${item.image}`}
-                alt=""
-                width="450"
-                onClick={() => handleModal(item.id)}
-              />
-              {/* </Link> */}
-              {isModal && handleModal}
-            </div>
-            <h1>{item.name}</h1>
-          </article>
-        )
-      })}
+    <div className="container">
+      <div className="generation-list">
+        {data.map((item) => {
+          return (
+            <article className="generation-item" key={item.id}>
+              <div className="generaion-item-detail">
+                {/* <Link to={`generation/${item.id}`}> */}
+                <img
+                  src={`http://localhost:5000/${item.image}`}
+                  alt=""
+                  width="450"
+                  onClick={() => handleModal(item.id)}
+                />
+                {/* </Link> */}
+                {isModal && handleModal}
+              </div>
+              <h1>{item.name}</h1>
+            </article>
+          )
+        })}
+      </div>
       <PaginationComponent
         count={data?.length}
         page={page}

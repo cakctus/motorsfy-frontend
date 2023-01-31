@@ -1,4 +1,5 @@
 import { check } from "../Check/check"
+import checkAnyValues from "../CheckValues/CheckValues"
 
 const Dimentions = ({ ress }) => {
   const obj = ress["cars_drivetrainbrakessuspension"]
@@ -9,10 +10,10 @@ const Dimentions = ({ ress }) => {
     const result = ress[str]
     if (result) {
       return (
-        <p key={index}>
-          <span>{check(str)}:</span>
-          {result}
-        </p>
+        <dl className="fancy-description-list" key={index}>
+          <dt className="item-title-color-mod">{check(str)}</dt>
+          <dd>{result}</dd>
+        </dl>
       )
     }
   }
@@ -21,7 +22,11 @@ const Dimentions = ({ ress }) => {
     <>
       {ress["cars_drivetrainbrakessuspension"] && (
         <>
-          <h3>Drivetrain Brakes Suspension</h3>
+          {checkAnyValues(obj) || (
+            <>
+              <h2 className="item-title">Drivetrain Brakes Suspension</h2>
+            </>
+          )}
           <div>
             {Object.keys(obj)
               .filter((key) => key !== "id")

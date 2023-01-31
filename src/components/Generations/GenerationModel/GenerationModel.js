@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import "./style.scss"
 
 const GenerationModel = ({ children, setVisible, isModal, h, setH }) => {
@@ -10,10 +9,11 @@ const GenerationModel = ({ children, setVisible, isModal, h, setH }) => {
       right: "0",
       left: "0",
       display: "none",
-      background: "rgba(0,0,0,0.3)",
+      background: "rgba(0,0,0,0.5)",
       display: "flex",
       justifyContent: "flex-end",
       overflowY: "scroll",
+      zIndex: "999",
       // height: "max-content",
     },
 
@@ -21,8 +21,8 @@ const GenerationModel = ({ children, setVisible, isModal, h, setH }) => {
       padding: "20px",
       background: "white",
       borderRadius: "5px",
-      width: "50vw",
-      minHeight: `${h}px`,
+      width: "40vw",
+      minHeight: `${h + 20}px`,
       background: "#2E2E2E",
       // justifyContent: "flex-end",
       // textAlign: "center",

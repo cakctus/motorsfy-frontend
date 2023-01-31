@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 import {
   useGetModificationDetailQuery,
   usePutRatingMutation,
@@ -15,16 +15,20 @@ import Engine from "./Engine/Engine"
 import ElectricEngines from "./ElectricEngines/ElectricEngines"
 import Comments from "./Comments/Comments"
 
+import "./style.scss"
+import ElectricEnginess from "./ElectricEnginess/ElectricEnginess"
+
 const ModificationItem = () => {
   const { modificationId } = useParams()
-  const {
-    data = [],
-    isLoading,
-    isError,
-  } = useGetModificationDetailQuery(modificationId)
+  const navigate = useNavigate()
+  const { data = [], isLoading } = useGetModificationDetailQuery(modificationId)
   const rating = useGetRatingQuery(modificationId)
   const [putRating, result] = usePutRatingMutation()
-  const commentsData = data.comment
+  const commentsData = data?.comment
+
+  if (data === null || undefined) {
+    return navigate("/")
+  }
 
   const ress = Object.entries(data)
     .filter((arr) => arr[1] !== null)
@@ -38,33 +42,59 @@ const ModificationItem = () => {
 
   if (isLoading) {
     return (
-      <div>
+      <div className="container">
         <h3>Loading...</h3>
       </div>
     )
   }
 
-  const handleRating = (value) => {
-    putRating({
-      id: modificationId,
-      rating: value,
-      userId: JSON.parse(localStorage.getItem("user")).userId,
-    })
-  }
-
   return (
-    <main>
-      <Rating modificationId={modificationId} />
-      <Preview ress={ress} />
-      <Dimentions ress={ress} />
-      <SpaceVolume ress={ress} />
-      <Drivetrain ress={ress} />
-      <Performance ress={ress} />
-      <ElectricsHybrids ress={ress} />
-      <Engine ress={ress} />
-      <ElectricEngines ress={ress} />
-      <Comments modificationId={modificationId} commentsData={commentsData} />
-    </main>
+    <div className="container">
+      <div className="breadcrumb">
+        <ul className="breadcrumb-list">
+          <li className="breadcrumb-item">
+            <Link to="/">
+              Home <span className="breadcrumb-slash">/</span>
+            </Link>
+          </li>
+          <li className="breadcrumb-item">
+            <Link to="/brands">
+              All brands <span className="breadcrumb-slash">/</span>
+            </Link>
+          </li>
+          <li className="breadcrumb-item">
+            <Link
+              to={`/brands/${data?.cars_generation?.cars_model?.cars_brand?.name}`}
+            >
+              {data?.cars_generation?.cars_model?.cars_brand?.name}
+              <span className="breadcrumb-slash">/</span>
+            </Link>
+          </li>
+          <li className="breadcrumb-item">
+            <Link
+              to={`/brands/${data?.cars_generation?.cars_model?.cars_brand?.name}/model/${data?.cars_generation?.model_id}`}
+            >
+              {data?.cars_generation?.cars_model?.name}{" "}
+              <span className="breadcrumb-slash">/</span>
+            </Link>
+          </li>
+          <li className="breadcrumb-item">{data?.cars_generation?.name}</li>
+        </ul>
+      </div>
+      <div className="modification-item-container">
+        <Rating modificationId={modificationId} />
+        <Preview ress={ress} />
+        <Dimentions ress={ress} />
+        <SpaceVolume ress={ress} />
+        <Drivetrain ress={ress} />
+        <Performance ress={ress} />
+        <ElectricsHybrids ress={ress} />
+        <Engine ress={ress} />
+        <ElectricEngines ress={ress} />
+        <ElectricEnginess ress={ress} />
+        <Comments modificationId={modificationId} commentsData={commentsData} />
+      </div>
+    </div>
   )
 }
 

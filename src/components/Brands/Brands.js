@@ -7,7 +7,7 @@ const Brands = () => {
 
   if (isLoading) {
     return (
-      <div>
+      <div className="container">
         <h3>Loading...</h3>
       </div>
     )
@@ -33,26 +33,35 @@ const Brands = () => {
   }
 
   return (
-    <div className="brands-list">
-      {data.map((item) => {
-        return (
-          <div className="brands-items" key={item.id}>
-            <div>{item.name}</div>
-            <div>
-              <Link to={`${item.name}/`}>
-                <img
-                  src={`http://localhost:5000/${item.image}`}
-                  data-src={`http://localhost:5000/${item.image}`}
-                  loading="lazy"
-                  alt="…"
-                  width="50"
-                  height="50"
-                />
-              </Link>
+    <div className="container">
+      <div className="breadcrumb">
+        <ul className="breadcrumb-list">
+          <li className="breadcrumb-item">
+            <Link to="/">Home</Link>
+          </li>
+        </ul>
+      </div>
+      <div className="brands-list">
+        {data.map((item) => {
+          return (
+            <div className="brands-items" key={item.id}>
+              <div>
+                <Link to={`${item.name}/`}>
+                  <img
+                    src={`http://localhost:5000/${item.image}`}
+                    data-src={`http://localhost:5000/${item.image}`}
+                    loading="lazy"
+                    alt="…"
+                    width="50"
+                    height="50"
+                  />
+                </Link>
+              </div>
+              <div>{item.name}</div>
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
+      </div>
     </div>
   )
 }

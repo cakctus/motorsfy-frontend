@@ -4,6 +4,7 @@ const TableAnimation = () => {
   const data = [...Array(20)].map((x) => 0)
   return (
     <div className="datatable-container">
+      <h2>Fastest Accelerating Cars</h2>
       <table className="datatable">
         <thead>
           <tr>
@@ -25,16 +26,16 @@ const TableAnimation = () => {
                     borderBottomLeftRadius: "15px",
                   }}
                 >
-                  <span></span>
+                  <span id="span-loader"></span>
                 </td>
                 <td>
                   <span className="span2"></span>
                 </td>
                 <td className="span3">
-                  <span></span>
+                  <span id="span-loader"></span>
                 </td>
                 <td className="span4">
-                  <span></span>
+                  <span id="span-loader"></span>
                 </td>
                 <td
                   className="span5"
@@ -43,7 +44,7 @@ const TableAnimation = () => {
                     borderBottomRightRadius: "15px",
                   }}
                 >
-                  <span></span>
+                  <span id="span-loader"></span>
                 </td>
               </tr>
             )

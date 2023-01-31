@@ -27,6 +27,8 @@ import getBodyCarsSlice from "../features/getBodyCars/getBodySlice"
 
 import { carsApi } from "../redux/carsApi"
 import { searchApi } from "../redux/searchApi"
+import { profileApi } from "../redux/profileApi"
+import { carsCRUDApi } from "../redux/carsCRUDApi"
 
 const rootReducer = combineReducers({
   auth: authSlice,
@@ -45,12 +47,14 @@ const rootReducer = combineReducers({
   [carsApi.reducerPath]: carsApi.reducer,
   [searchApi.reducerPath]: searchApi.reducer,
   [mainCategory.reducerPath]: mainCategory.reducer,
+  [profileApi.reducerPath]: profileApi.reducer,
+  [carsCRUDApi.reducerPath]: carsCRUDApi.reducer,
 })
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["saveOptions", "search", "idGeneration"],
+  whitelist: ["saveOptions", "search", "idGeneration", "auth"],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -69,7 +73,9 @@ const store = configureStore({
     })
       .concat(carsApi.middleware)
       .concat(searchApi.middleware)
-      .concat(mainCategory.middleware),
+      .concat(mainCategory.middleware)
+      .concat(profileApi.middleware)
+      .concat(carsCRUDApi.middleware),
 })
 
 export const persistor = persistStore(store)

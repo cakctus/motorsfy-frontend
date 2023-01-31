@@ -1,1 +1,20 @@
+.search-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-end;
 
+  select {
+    height: 50px;
+  }
+
+  button {
+    height: 50px;
+  }
+}
+
+.search-brands {
+  width: 200px;
+}

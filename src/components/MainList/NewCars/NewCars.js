@@ -14,14 +14,15 @@ const NewCars = () => {
   const [fetching, setFetching] = useState(false)
   const [page, setPage] = useState(10)
   const [isTop, setIsTop] = useState(0)
+  const generationRef = useRef(null)
 
   useEffect(() => {
     setCars(data.data?.slice(0, page))
-  }, [data.data])
+  }, [data.data, page])
 
   useEffect(() => {
     document.addEventListener("wheel", handleWheel)
-    return () => document.removeEventListener("whell", handleWheel)
+    return () => document.removeEventListener("wheel", handleWheel)
   }, [])
 
   useEffect(() => {
@@ -33,25 +34,25 @@ const NewCars = () => {
 
   useEffect(() => {
     document.addEventListener("scroll", scrollHandler)
-    return () => {
-      document.removeEventListener("scroll", scrollHandler)
-    }
+    return () => document.removeEventListener("scroll", scrollHandler)
   }, [])
 
   const scrollHandler = (e) => {
+    const header = document.querySelector("header")
     if (
-      window.innerHeight + e.target.documentElement.scrollTop + 1 >=
-      e.target.documentElement.scrollHeight
+      window.innerHeight + e.target.documentElement.scrollTop >=
+      generationRef?.current?.scrollHeight + header.offsetHeight
     ) {
       setFetching(true)
       setPage((prev) => prev + 10)
     }
+
     setIsTop(window.pageYOffset)
   }
 
   if (isLoading) {
     return (
-      <div>
+      <div className="container">
         <h1>Loading...</h1>
       </div>
     )
@@ -76,11 +77,8 @@ const NewCars = () => {
     }
   }
 
-  console.log(data, "data")
-  console.log(cars, "cars")
-
   return (
-    <div>
+    <div className="container">
       <div
         onClick={() => window.scrollTo(0, 0)}
         id="myBtn"
@@ -88,16 +86,21 @@ const NewCars = () => {
       >
         <button>Top</button>
       </div>
-      {cars !== undefined &&
-        cars.map((item, index) => {
-          return (
-            <NewCarsListItems
-              item={item}
-              key={item.id}
-              handleModal={handleModal}
-            />
-          )
-        })}
+      {data?.data.length && (
+        <>
+          <h2>Search results:</h2>
+        </>
+      )}
+      <div id="gen-list" className="generation-list" ref={generationRef}>
+        {cars !== undefined &&
+          cars.map((item, index) => {
+            return (
+              <div className="generation-item" key={item.id}>
+                <NewCarsListItems item={item} handleModal={handleModal} />
+              </div>
+            )
+          })}
+      </div>
 
       {isModal && (
         <GenerationModel

@@ -1,18 +1,19 @@
 import { check } from "../Check/check"
+import checkAnyValues from "../CheckValues/CheckValues"
 
 const Engine = ({ ress }) => {
   const obj = ress["cars_internalcombustionengine"]
     ? ress["cars_internalcombustionengine"]
     : {}
 
-  const generator = (ress, str) => {
+  const generator = (ress, str, index) => {
     const result = ress[str]
     if (result) {
       return (
-        <p>
-          <span>{check(str)}:</span>
-          {result}
-        </p>
+        <dl className="fancy-description-list" key={index}>
+          <dt className="item-title-color-mod">{check(str)}</dt>
+          <dd>{result}</dd>
+        </dl>
       )
     }
   }
@@ -21,11 +22,15 @@ const Engine = ({ ress }) => {
     <>
       {ress["cars_internalcombustionengine"] && (
         <>
-          <h3>Engine</h3>
+          {checkAnyValues(obj) || (
+            <>
+              <h2 className="item-title">Engine</h2>
+            </>
+          )}
           <div>
             {Object.keys(obj)
               .filter((key) => key !== "id")
-              .map((key) => generator(obj, key))}
+              .map((key, index) => generator(obj, key, index))}
           </div>
         </>
       )}

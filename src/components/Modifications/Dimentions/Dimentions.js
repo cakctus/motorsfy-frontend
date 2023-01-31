@@ -1,5 +1,5 @@
-// import { generator } from "../generator"
 import { check } from "../Check/check"
+import checkAnyValues from "../CheckValues/CheckValues"
 
 const Dimentions = ({ ress }) => {
   const obj = ress["cars_dimensions"] ? ress["cars_dimensions"] : {}
@@ -8,10 +8,10 @@ const Dimentions = ({ ress }) => {
     const result = ress[str]
     if (result) {
       return (
-        <p key={index}>
-          <span>{check(str)}:</span>
-          {result}
-        </p>
+        <dl className="fancy-description-list" key={index}>
+          <dt className="item-title-color-mod">{check(str)}</dt>
+          <dd>{result}</dd>
+        </dl>
       )
     }
   }
@@ -20,7 +20,11 @@ const Dimentions = ({ ress }) => {
     <>
       {ress["cars_dimensions"] && (
         <>
-          <h3>Dimentions</h3>
+          {checkAnyValues(obj) || (
+            <>
+              <h2>Dimentions</h2>
+            </>
+          )}
           {Object.keys(obj)
             .filter((key) => key !== "id")
             .map((key, index) => generator(obj, key, index))}

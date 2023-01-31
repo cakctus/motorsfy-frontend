@@ -41,9 +41,18 @@
   color: var(--dt-text-color);
   max-width: 50%;
   margin: 0 auto;
-  font-size: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
   box-sizing: border-box;
   padding: 0 auto;
+  margin-top: 1rem;
+  a {
+    text-decoration: none;
+  }
+
+  h2 {
+    text-align: center;
+  }
 }
 
 .datatable img {
@@ -54,7 +63,7 @@
 
 .datatable-container .datatable {
   border-collapse: collapse;
-  width: 100%!;
+  width: 90;
 }
 
 .datatable-container .datatable,
@@ -78,4 +87,28 @@
 
 .datatable-container .datatable tbody tr:nth-child(even) {
   background-color: var(--dt-even-row-color);
+}
+
+.td-img {
+  position: relative;
+}
+
+.td-img-show {
+  display: none;
+  flex-direction: column;
+  width: 250px;
+  gap: 1rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  box-shadow: rgba(0, 0, 0, 0.7) 0px 4px 16px 0px;
+  background-color: #212125;
+
+  img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 250px;
+  }
 }

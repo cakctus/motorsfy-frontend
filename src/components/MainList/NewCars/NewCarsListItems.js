@@ -1,9 +1,11 @@
-import React from "react"
-
 const NewCarsListItems = ({ item, handleModal }) => {
   return (
-    <div onClick={() => handleModal(item.id)}>
-      <img src={`http://localhost:5000//${item.image}`} width="400" alt="" />
+    <div
+      className="generation-item-detail"
+      onClick={() => handleModal(item.id)}
+    >
+      <img src={`http://localhost:5000//${item.image}`} alt="" />
+      <h1>{item.name}</h1>
     </div>
   )
 }

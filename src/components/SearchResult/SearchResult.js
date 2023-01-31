@@ -22,8 +22,6 @@ const SearchResult = () => {
   const height = useRef(null)
   const dispatch = useDispatch()
 
-  console.log(data)
-
   const handleModalAll = (id) => {
     dispatch(addModelIdSlice(id))
   }
@@ -51,7 +49,7 @@ const SearchResult = () => {
 
   if (isLoading) {
     return (
-      <div>
+      <div className="container">
         <h1>Loading</h1>
       </div>
     )
@@ -59,25 +57,31 @@ const SearchResult = () => {
 
   if (search.modelId === "all" && data.data.length) {
     return (
-      <div>
-        {data.data.map((item, index) => {
-          console.log(item)
-          return (
-            <article key={index}>
-              <h1>{item.name}</h1>
-              <Link to="/result/detail">
-                <div>
-                  <img
-                    src={`http://localhost:5000/${item.image}`}
-                    alt=""
-                    width="300"
-                    onClick={() => handleModalAll(item.id)}
-                  />
-                </div>
-              </Link>
-            </article>
-          )
-        })}
+      <div className="container">
+        {data?.data.length && (
+          <>
+            <h2>Search results:</h2>
+          </>
+        )}
+        <div className="generation-list">
+          {data.data.map((item, index) => {
+            return (
+              <article className="generation-item" key={index}>
+                <Link to="/result/detail">
+                  <div>
+                    <img
+                      src={`http://localhost:5000/${item.image}`}
+                      alt=""
+                      width="350"
+                      onClick={() => handleModalAll(item.id)}
+                    />
+                  </div>
+                </Link>
+                <h1>{item.name}</h1>
+              </article>
+            )
+          })}
+        </div>
         {data?.data?.length && (
           <PaginationComponent
             count={data?.meta?.lastPage}
@@ -91,27 +95,40 @@ const SearchResult = () => {
 
   return (
     <>
-      <div>
-        {search.modelId !== "all" &&
-          data?.data?.length &&
-          data.data
-            // .filter((item) => item.cars_modification.length !== 0)
-            .map((item, index) => {
-              console.log(item)
-              return (
-                <article key={index}>
-                  <h1>{item.name}</h1>
-                  <div>
-                    <img
-                      src={`http://localhost:5000/${item.image}`}
-                      alt=""
-                      width="300"
-                      onClick={() => handleModal(item.id)}
-                    />
-                  </div>
-                </article>
-              )
-            })}
+      <div className="container">
+        {data?.data.length && (
+          <>
+            <h2>Search results:</h2>
+          </>
+        )}
+        <div className="generation-list">
+          {search.modelId !== "all" &&
+            data?.data?.length &&
+            data.data
+              // .filter((item) => item.cars_modification.length !== 0)
+              .map((item, index) => {
+                return (
+                  <article className="generation-item" key={index}>
+                    <div className="generation-item-detail">
+                      <img
+                        src={`http://localhost:5000/${item.image}`}
+                        alt=""
+                        width="350"
+                        onClick={() => handleModal(item.id)}
+                      />
+                    </div>
+                    <h1>{item.name}</h1>
+                  </article>
+                )
+              })}
+          {data?.data?.length && (
+            <PaginationComponent
+              count={data?.meta?.lastPage}
+              page={page}
+              handleChange={handlePagination}
+            />
+          )}
+        </div>
         {isModal && (
           <SearchResultModal
             setVisible={setIsModal}
@@ -125,13 +142,6 @@ const SearchResult = () => {
           </SearchResultModal>
         )}
       </div>
-      {data?.data?.length && (
-        <PaginationComponent
-          count={data?.meta?.lastPage}
-          page={page}
-          handleChange={handlePagination}
-        />
-      )}
     </>
   )
 }
